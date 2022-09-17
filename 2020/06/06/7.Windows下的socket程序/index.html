@@ -6,17 +6,17 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Hello World | Hexo</title>
+  <title>Windows下的socket程序 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+  <meta name="description" content="服务器端代码 server.cpp： 1234567891011121314151617181920212223242526272829303132333435363738394041#include &lt;stdio.h&gt;#include &lt;winsock2.h&gt;#pragma comment (lib, &quot;ws2_32.lib&quot;)  &#x2F;&#x2F;加载 ws2_32.dllint m">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hello World">
-<meta property="og:url" content="http://yoursite.com/2020/06/02/hello-world/index.html">
+<meta property="og:title" content="Windows下的socket程序">
+<meta property="og:url" content="http://yoursite.com/2020/06/06/7.Windows%E4%B8%8B%E7%9A%84socket%E7%A8%8B%E5%BA%8F/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+<meta property="og:description" content="服务器端代码 server.cpp： 1234567891011121314151617181920212223242526272829303132333435363738394041#include &lt;stdio.h&gt;#include &lt;winsock2.h&gt;#pragma comment (lib, &quot;ws2_32.lib&quot;)  &#x2F;&#x2F;加载 ws2_32.dllint m">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2020-06-02T15:50:02.709Z">
-<meta property="article:modified_time" content="2020-06-02T15:50:02.709Z">
+<meta property="article:published_time" content="2020-06-06T14:52:50.000Z">
+<meta property="article:modified_time" content="2020-06-07T11:24:20.208Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary">
   
@@ -154,39 +154,199 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-hello-world" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-7.Windows下的socket程序" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      Hello World
+      Windows下的socket程序
     </h1>
   
 
         
-        <a href="/2020/06/02/hello-world/" class="archive-article-date">
-  	<time datetime="2020-06-02T15:50:02.709Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-06-02</time>
+        <a href="/2020/06/06/7.Windows%E4%B8%8B%E7%9A%84socket%E7%A8%8B%E5%BA%8F/" class="archive-article-date">
+  	<time datetime="2020-06-06T14:52:50.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-06-06</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
+        <p>服务器端代码 server.cpp：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;winsock2.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">pragma</span> comment (lib, <span class="meta-string">"ws2_32.lib"</span>)  <span class="comment">//加载 ws2_32.dll</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="comment">//初始化 DLL</span></span><br><span class="line">    WSADATA wsaData;</span><br><span class="line">    WSAStartup( MAKEWORD(<span class="number">2</span>, <span class="number">2</span>), &amp;wsaData);</span><br><span class="line"></span><br><span class="line">    <span class="comment">//创建套接字</span></span><br><span class="line">    SOCKET servSock = socket(PF_INET, SOCK_STREAM, IPPROTO_TCP);</span><br><span class="line"></span><br><span class="line">    <span class="comment">//绑定套接字</span></span><br><span class="line">    sockaddr_in sockAddr;</span><br><span class="line">    <span class="built_in">memset</span>(&amp;sockAddr, <span class="number">0</span>, <span class="keyword">sizeof</span>(sockAddr));  <span class="comment">//每个字节都用0填充</span></span><br><span class="line">    sockAddr.sin_family = PF_INET;  <span class="comment">//使用IPv4地址</span></span><br><span class="line">    sockAddr.sin_addr.s_addr = inet_addr(<span class="string">"127.0.0.1"</span>);  <span class="comment">//具体的IP地址</span></span><br><span class="line">    sockAddr.sin_port = htons(<span class="number">1234</span>);  <span class="comment">//端口</span></span><br><span class="line">    bind(servSock, (SOCKADDR*)&amp;sockAddr, <span class="keyword">sizeof</span>(SOCKADDR));</span><br><span class="line"></span><br><span class="line">    <span class="comment">//进入监听状态</span></span><br><span class="line">    <span class="built_in">listen</span>(servSock, <span class="number">20</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">//接收客户端请求</span></span><br><span class="line">    SOCKADDR clntAddr;</span><br><span class="line">    <span class="keyword">int</span> nSize = <span class="keyword">sizeof</span>(SOCKADDR);</span><br><span class="line">    SOCKET clntSock = accept(servSock, (SOCKADDR*)&amp;clntAddr, &amp;nSize);</span><br><span class="line"></span><br><span class="line">    <span class="comment">//向客户端发送数据</span></span><br><span class="line">    <span class="keyword">char</span> *str = <span class="string">"Hello World!"</span>;</span><br><span class="line">    send(clntSock, str, <span class="built_in">strlen</span>(str)+<span class="keyword">sizeof</span>(<span class="keyword">char</span>), <span class="literal">NULL</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">//关闭套接字</span></span><br><span class="line">    closesocket(clntSock);</span><br><span class="line">    closesocket(servSock);</span><br><span class="line"></span><br><span class="line">    <span class="comment">//终止 DLL 的使用</span></span><br><span class="line">    WSACleanup();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
 
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
 
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+<p>客户端端代码 client.cpp：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;WinSock2.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">pragma</span> comment(lib, <span class="meta-string">"ws2_32.lib"</span>)  <span class="comment">//加载 ws2_32.dll</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="comment">//初始化DLL</span></span><br><span class="line">    WSADATA wsaData;</span><br><span class="line">    WSAStartup(MAKEWORD(<span class="number">2</span>, <span class="number">2</span>), &amp;wsaData);</span><br><span class="line"></span><br><span class="line">    <span class="comment">//创建套接字</span></span><br><span class="line">    SOCKET sock = socket(PF_INET, SOCK_STREAM, IPPROTO_TCP);</span><br><span class="line"></span><br><span class="line">    <span class="comment">//向服务器发起请求</span></span><br><span class="line">    sockaddr_in sockAddr;</span><br><span class="line">    <span class="built_in">memset</span>(&amp;sockAddr, <span class="number">0</span>, <span class="keyword">sizeof</span>(sockAddr));  <span class="comment">//每个字节都用0填充</span></span><br><span class="line">    sockAddr.sin_family = PF_INET;</span><br><span class="line">    sockAddr.sin_addr.s_addr = inet_addr(<span class="string">"127.0.0.1"</span>);</span><br><span class="line">    sockAddr.sin_port = htons(<span class="number">1234</span>);</span><br><span class="line">    <span class="built_in">connect</span>(sock, (SOCKADDR*)&amp;sockAddr, <span class="keyword">sizeof</span>(SOCKADDR));</span><br><span class="line"></span><br><span class="line">    <span class="comment">//接收服务器传回的数据</span></span><br><span class="line">    <span class="keyword">char</span> szBuffer[MAXBYTE] = &#123;<span class="number">0</span>&#125;;</span><br><span class="line">    recv(sock, szBuffer, MAXBYTE, <span class="literal">NULL</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">//输出接收到的数据</span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"Message form server: %s\n"</span>, szBuffer);</span><br><span class="line"></span><br><span class="line">    <span class="comment">//关闭套接字</span></span><br><span class="line">    closesocket(sock);</span><br><span class="line"></span><br><span class="line">    <span class="comment">//终止使用 DLL</span></span><br><span class="line">    WSACleanup();</span><br><span class="line"></span><br><span class="line">    system(<span class="string">"pause"</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html" target="_blank" rel="noopener">Deployment</a></p>
+
+
+<h3 id="WSAStartup函数原型"><a href="#WSAStartup函数原型" class="headerlink" title="WSAStartup函数原型"></a>WSAStartup函数原型</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">WSAStartup</span><span class="params">(</span></span></span><br><span class="line"><span class="function"><span class="params">	_In_  WORD      wVersionRequested,</span></span></span><br><span class="line"><span class="function"><span class="params">	_Out_ LPWSADATA lpWSAData</span></span></span><br><span class="line"><span class="function"><span class="params">)</span></span>;</span><br></pre></td></tr></table></figure>
+
+<h3 id="参数说明"><a href="#参数说明" class="headerlink" title="参数说明"></a>参数说明</h3><ul>
+<li><h4 id="wVersionRequested-in"><a href="#wVersionRequested-in" class="headerlink" title="wVersionRequested [in]"></a>wVersionRequested [in]</h4><p>调用者可以使用的Windows套接字规范的最高版本。高位字节指定次要版本号；低位字节指定主版本号。</p>
+</li>
+<li><h4 id="lpWSAData-out"><a href="#lpWSAData-out" class="headerlink" title="lpWSAData[out]"></a>lpWSAData[out]</h4><p>指向WSADATA数据结构的指针，该数据结构将接收Windows套接字实现的详细信息</p>
+</li>
+</ul>
+<h3 id="返回值"><a href="#返回值" class="headerlink" title="返回值"></a>返回值</h3><p>如果成功，则WSAStartup函数将返回零。否则，它将返回错误代码。</p>
+<h3 id="WSACleanup函数原型"><a href="#WSACleanup函数原型" class="headerlink" title="WSACleanup函数原型"></a>WSACleanup函数原型</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">WSACleanup</span><span class="params">(<span class="keyword">void</span>)</span></span>;</span><br></pre></td></tr></table></figure>
+
+<h3 id="返回值-1"><a href="#返回值-1" class="headerlink" title="返回值"></a>返回值</h3><p>The return value is zero if the operation was successful.Otherwise, the value SOCKET_ERROR is returned, and a specific error number can be retrieved by calling WSAGetLastError。</p>
+<h3 id="socket函数原型"><a href="#socket函数原型" class="headerlink" title="socket函数原型"></a>socket函数原型</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">SOCKET WSAAPI <span class="title">socket</span><span class="params">(</span></span></span><br><span class="line"><span class="function"><span class="params">	_In_ <span class="keyword">int</span> af,</span></span></span><br><span class="line"><span class="function"><span class="params">	_In_ <span class="keyword">int</span> type,</span></span></span><br><span class="line"><span class="function"><span class="params">	_In_ <span class="keyword">int</span> protocol</span></span></span><br><span class="line"><span class="function"><span class="params">)</span></span>;</span><br></pre></td></tr></table></figure>
+
+<h3 id="参数说明-1"><a href="#参数说明-1" class="headerlink" title="参数说明"></a>参数说明</h3><ul>
+<li><h4 id="af-in"><a href="#af-in" class="headerlink" title="af[in]"></a>af[in]</h4><p>指定地址家族。  Ws2def.h文件中定义</p>
+<p>注意 AF_地址族和PF_协议族常量的值是相同的（例如，AF_INET和PF_INET），因此可以使用任何一个常量。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">* Protocol families, same as address families for now.</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> PF_UNSPEC       AF_UNSPEC</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> PF_UNIX         AF_UNIX</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> PF_INET         AF_INET</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> PF_IMPLINK      AF_IMPLINK</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> PF_PUP          AF_PUP</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> PF_CHAOS        AF_CHAOS</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> PF_NS           AF_NS</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> PF_IPX          AF_IPX</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> PF_ISO          AF_ISO</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> PF_OSI          AF_OSI</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> PF_ECMA         AF_ECMA</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> PF_DATAKIT      AF_DATAKIT</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> PF_CCITT        AF_CCITT</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> PF_SNA          AF_SNA</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> PF_DECnet       AF_DECnet</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> PF_DLI          AF_DLI</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> PF_LAT          AF_LAT</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> PF_HYLINK       AF_HYLINK</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> PF_APPLETALK    AF_APPLETALK</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> PF_VOICEVIEW    AF_VOICEVIEW</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> PF_FIREFOX      AF_FIREFOX</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> PF_UNKNOWN1     AF_UNKNOWN1</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> PF_BAN          AF_BAN</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> PF_ATM          AF_ATM</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> PF_INET6        AF_INET6</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">if</span>(_WIN32_WINNT &gt;= 0x0600)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> PF_BTH          AF_BTH</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span> <span class="comment">//(_WIN32_WINNT &gt;= 0x0600)</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> PF_MAX          AF_MAX</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><h4 id="type-in"><a href="#type-in" class="headerlink" title="type[in]"></a>type[in]</h4><p>socket的类型</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * Types</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="comment">//一种套接字类型，可通过OOB数据传输机制提供顺序的，可靠的，双向的，基于连接的字节流。 </span></span><br><span class="line"><span class="comment">//此套接字类型将传输控制协议（TCP）用于Internet地址系列（AF_INET或AF_INET6）。</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> SOCK_STREAM     1               <span class="comment">/* stream socket */</span></span></span><br><span class="line"><span class="comment">//一种支持数据报的套接字类型，这些数据报是无连接的，不可靠的最大长度固定（通常很小）的缓冲区。</span></span><br><span class="line"><span class="comment">//此套接字类型对Internet地址系列（AF_INET或AF_INET6）使用用户数据报协议（UDP）。</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> SOCK_DGRAM      2               <span class="comment">/* datagram socket */</span></span></span><br><span class="line"><span class="comment">//提供原始套接字的套接字类型，该套接字允许应用程序操纵下一个上层协议头。 </span></span><br><span class="line"><span class="comment">//要操作IPv4标头，必须在套接字上设置IP_HDRINCL套接字选项。 要操作IPv6标头，必须在套接字上设置IPV6_HDRINCL套接字选项。</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> SOCK_RAW        3               <span class="comment">/* raw-protocol interface */</span></span></span><br><span class="line"><span class="comment">//提供可靠消息数据报的套接字类型。 这种类型的一个示例是Windows中的实用通用多播（PGM）多播协议实现，通常称为可靠多播编程。</span></span><br><span class="line"><span class="comment">//仅当安装了可靠多播协议时才支持此类型值。</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> SOCK_RDM        4               <span class="comment">/* reliably-delivered message */</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> SOCK_SEQPACKET  5               <span class="comment">/* sequenced packet stream */</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">//在Windows套接字2中，引入了新的套接字类型。 应用程序可以通过WSAEnumProtocols函数动态发现每个可用传输协议的属性。 因此，应用程序可以确定地址族的可能套接字类型和协议选项，并在指定此参数时使用此信息。 随着新套接字类型，地址族和协议的定义，Winsock2.h和Ws2def.h头文件中的套接字类型定义将定期更新。</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><h4 id="protocol-in"><a href="#protocol-in" class="headerlink" title="protocol[in]"></a>protocol[in]</h4><p>使用的协议,如果指定的值为0，则调用者不希望指定协议，并且服务提供商将选择要使用的协议。当af参数为AF_INET或AF_INET6并且类型为SOCK_RAW时，在IPv6或IPv4数据包头的协议字段中设置为协议指定的值。</p>
+<p>常用的有如下几个:</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">IPPROTO_IGMP  <span class="comment">//Internet组管理协议（IGMP）。 当af参数是AF_UNSPEC，AF_INET或AF_INET6且type参数是SOCK_RAW或未指定时，这是一个可能的值。</span></span><br><span class="line">IPPROTO_ICMP  <span class="comment">//Internet控制消息协议（ICMP）。 当af参数是AF_UNSPEC，AF_INET或AF_INET6且type参数是SOCK_RAW或未指定时，这是一个可能的值。</span></span><br><span class="line">IPPROTO_TCP   <span class="comment">//传输控制协议（TCP）。 当af参数是AF_INET或AF_INET6且type参数是SOCK_STREAM时，这是一个可能的值。</span></span><br><span class="line">IPPROTO_UDP	  <span class="comment">//用户数据报协议（UDP）。 当af参数是AF_INET或AF_INET6且type参数是SOCK_DGRAM时，这是一个可能的值</span></span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ul>
+<h3 id="bind函数原型"><a href="#bind函数原型" class="headerlink" title="bind函数原型"></a>bind函数原型</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">bind</span><span class="params">(</span></span></span><br><span class="line"><span class="function"><span class="params">	_in_ socket                s,</span></span></span><br><span class="line"><span class="function"><span class="params">	_in_ <span class="keyword">const</span> struct sockaddr *name,</span></span></span><br><span class="line"><span class="function"><span class="params">	_in_ <span class="keyword">int</span>                   namelen</span></span></span><br><span class="line"><span class="function"><span class="params">)</span></span>;</span><br></pre></td></tr></table></figure>
+
+<h3 id="参数说明-2"><a href="#参数说明-2" class="headerlink" title="参数说明"></a>参数说明</h3><ul>
+<li><h4 id="s-in"><a href="#s-in" class="headerlink" title="s [in]"></a>s [in]</h4><p>标识未绑定套接字的描述符。</p>
+</li>
+<li><h4 id="name-in"><a href="#name-in" class="headerlink" title="name [in]"></a>name [in]</h4><p>指向要分配给绑定套接字的本地地址的sockaddr结构的指针。</p>
+</li>
+<li><h4 id="namelen-in"><a href="#namelen-in" class="headerlink" title="namelen [in]"></a>namelen [in]</h4><p>名称参数指向的值的长度（以字节为单位）</p>
+</li>
+</ul>
+<h3 id="返回值-2"><a href="#返回值-2" class="headerlink" title="返回值"></a>返回值</h3><p>​    如果没有错误发生，则绑定返回零。 否则，它返回SOCKET_ERROR</p>
+<h3 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h3><p>通过调用套接字函数创建套接字时，该套接字存在于名称空间（地址族）中，但未分配名称。 通过将本地名称分配给未命名的套接字，可以使用bind函数建立套接字的本地关联。使用Internet地址族时，名称由三部分组成：</p>
+<ul>
+<li>地址族。</li>
+<li>主机地址。</li>
+<li>标识应用程序的端口号。</li>
+</ul>
+<p>如果应用程序不关心分配了什么本地地址，请在name参数的sa_data成员中为IPv4本地地址指定常量值INADDR_ANY，对于TCP / IP，如果将端口指定为零，则服务提供商会从动态客户端端口范围为应用程序分配一个唯一的端口。</p>
+<p>调用bind之后，应用程序可以使用getsockname来获取分配给套接字的地址和端口。 如果Internet地址等于INADDR_ANY或in6addr_any，则在连接套接字之前getsockname不一定会提供地址，因为如果主机是多宿主的，则几个地址都可以有效。 对于客户端应用程序，建议不要绑定到端口0以外的特定端口号，因为存在与已经在本地计算机上使用该端口号的另一个套接字冲突的危险。</p>
+<p>对于多播操作，首选方法是调用bind函数，将套接字与本地IP地址关联，然后加入多播组。尽管此操作顺序不是强制性的，但强烈建议您这样做。因此，多播应用程序将首先在本地计算机上选择一个IPv4或IPv6地址，通配符IPv4地址（INADDR_ANY）或通配符IPv6地址（in6addr_any）。然后，多播应用程序将使用name参数的sa_data成员中的地址中的该地址调用bind函数，以将本地IP地址与套接字相关联。如果指定了通配符地址，则Windows将选择要使用的本地IP地址。绑定功能完成后，应用程序将加入感兴趣的多播组。</p>
+<h3 id="inet-addr函数原型"><a href="#inet-addr函数原型" class="headerlink" title="inet_addr函数原型"></a>inet_addr函数原型</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">unsigned</span> <span class="keyword">long</span> <span class="title">inet_addr</span><span class="params">(</span></span></span><br><span class="line"><span class="function"><span class="params">	_In_ <span class="keyword">const</span> <span class="keyword">char</span> *cp</span></span></span><br><span class="line"><span class="function"><span class="params">)</span></span>;</span><br></pre></td></tr></table></figure>
+
+<h3 id="参数说明-3"><a href="#参数说明-3" class="headerlink" title="参数说明"></a>参数说明</h3><ul>
+<li><h4 id="cp-in"><a href="#cp-in" class="headerlink" title="cp [in]"></a>cp [in]</h4><p>以NULL终止的字符串，表示以Internet标准“。’’（点）表示法表示的数字。</p>
+</li>
+</ul>
+<h3 id="返回值-3"><a href="#返回值-3" class="headerlink" title="返回值"></a>返回值</h3><p>如果没有错误发生，inet_addr函数将返回一个无符号的long值，其中包含给定Internet地址的适当二进制表示形式。如果cp参数中的字符串不包含合法的Internet地址，例如，如果“ a.b.c.d”地址的一部分超过255，则inet_addr返回值INADDR_NONE。</p>
+<p>inet_addr函数解释cp参数指定的字符串。 此字符串表示以Internet标准“.”表示的数字Internet地址。返回的值是适合用作Internet地址的数字。<strong>所有Internet地址均以IP的网络顺序（从左到右按字节顺序）返回。</strong> 如果将“”（空格）传递给inet_addr函数，则inet_addr返回零。</p>
+<p><strong>注意点分数字可以是C语言中指定的十进制，八进制或十六进制。</strong> 以“ 0x”或“ 0X”开头的数字表示十六进制。 以“ 0”开头的数字表示八进制。 所有其他数字都解释为十进制。</p>
+<h3 id="htons函数原型"><a href="#htons函数原型" class="headerlink" title="htons函数原型"></a>htons函数原型</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">short WSAAPI <span class="title">htons</span><span class="params">(</span></span></span><br><span class="line"><span class="function"><span class="params">_In_ u_short hostshort</span></span></span><br><span class="line"><span class="function"><span class="params">)</span></span>;</span><br></pre></td></tr></table></figure>
+
+<h3 id="参数说明-4"><a href="#参数说明-4" class="headerlink" title="参数说明"></a>参数说明</h3><ul>
+<li><h4 id="hostshort-in"><a href="#hostshort-in" class="headerlink" title="hostshort [in]"></a>hostshort [in]</h4><p>以主机字节顺序的16-bit数字。</p>
+</li>
+</ul>
+<h3 id="返回值-4"><a href="#返回值-4" class="headerlink" title="返回值"></a>返回值</h3><p>htons函数以TCP / IP网络字节顺序返回该值。htons函数以主机字节顺序获取16位数字，并以TCP / IP网络（AF_INET或AF_INET6地址族）中使用的网络字节顺序返回16位数字。</p>
+<p><strong>htons函数可用于将主机字节顺序的IP端口号转换为网络字节顺序的IP端口号。</strong></p>
+<h3 id="listen函数原型"><a href="#listen函数原型" class="headerlink" title="listen函数原型"></a>listen函数原型</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">listen</span><span class="params">(</span></span></span><br><span class="line"><span class="function"><span class="params">_In_ SOCKET s,</span></span></span><br><span class="line"><span class="function"><span class="params">_In_ <span class="keyword">int</span>    backlog</span></span></span><br><span class="line"><span class="function"><span class="params">)</span></span>;</span><br></pre></td></tr></table></figure>
+
+<h3 id="参数说明-5"><a href="#参数说明-5" class="headerlink" title="参数说明"></a>参数说明</h3><ul>
+<li><h4 id="s-in-1"><a href="#s-in-1" class="headerlink" title="s [in]"></a>s [in]</h4><p>标识绑定的未连接套接字的描述符</p>
+</li>
+<li><h4 id="backlog-in"><a href="#backlog-in" class="headerlink" title="backlog [in]"></a>backlog [in]</h4><p>挂起的连接队列的最大长度。 如果设置为SOMAXCONN，则负责套接字s的基础服务提供商将积压设置为最大合理值。 没有标准条款来获取实际积压值。</p>
+</li>
+</ul>
+<h3 id="返回值-5"><a href="#返回值-5" class="headerlink" title="返回值"></a>返回值</h3><p>如果没有错误发生，则listen返回零。 否则，返回值SOCKET_ERROR</p>
+<h3 id="摘要-1"><a href="#摘要-1" class="headerlink" title="摘要"></a>摘要</h3><p>为了接受连接，首先使用套接字函数创建一个套接字，然后使用bind函数将其绑定到本地地址。用listen指定传入连接的待办事项，然后使用accept函数接受连接。面向连接的套接字（例如SOCK_STREAM类型的套接字）与listen一起使用。套接字s进入被动模式，在该模式下，传入的连接请求被确认并排队等待进程接受。SOMAXCONN的积压值是一个特殊的常数，它指示负责套接字的基础服务提供者将挂起的连接队列的长度设置为最大合理值。在Windows套接字2上，此最大值默认为一个较大的值（通常为数百或更大）。在Bluetooth应用程序中调用listen函数时，<strong>强烈建议为积压参数使用一个低得多的值（通常为2到4），因为仅接受少数客户端连接。这减少了分配给侦听套接字使用的系统资源。该建议同样适用于仅需要几个客户端连接的其他网络应用程序。</strong>侦听功能通常由一次可以具有多个连接请求的服务器使用。如果连接请求到达并且队列已满，则客户端将收到带有WSAECONNREFUSED指示的错误。</p>
+<h3 id="accept函数原型"><a href="#accept函数原型" class="headerlink" title="accept函数原型"></a>accept函数原型</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">SOCKET <span class="title">accept</span><span class="params">(</span></span></span><br><span class="line"><span class="function"><span class="params">	_In_    SOCKET          s,</span></span></span><br><span class="line"><span class="function"><span class="params">	_Out_   struct sockaddr *addr,</span></span></span><br><span class="line"><span class="function"><span class="params">	_Inout_ <span class="keyword">int</span>             *addrlen</span></span></span><br><span class="line"><span class="function"><span class="params">)</span></span>;</span><br></pre></td></tr></table></figure>
+
+<h3 id="参数说明-6"><a href="#参数说明-6" class="headerlink" title="参数说明"></a>参数说明</h3><ul>
+<li><h4 id="s-in-2"><a href="#s-in-2" class="headerlink" title="s [in]"></a>s [in]</h4><p>用于标识已使用侦听功能置于侦听状态的套接字。 实际上，连接是通过accept返回的套接字建立的。</p>
+</li>
+<li><h4 id="addr-out"><a href="#addr-out" class="headerlink" title="addr [out]"></a>addr [out]</h4><p>可选的指向缓冲区的指针，该缓冲区接收连接实体的地址。addr参数的确切格式由创建sockaddr结构的套接字时建立的地址族确定。可以不指定直接填NULL。</p>
+</li>
+<li><h4 id="addrlen-in-out"><a href="#addrlen-in-out" class="headerlink" title="addrlen [in, out]"></a>addrlen [in, out]</h4><p>可选的指向整数的指针，该整数包含addr参数指向的结构的长度。</p>
+</li>
+</ul>
+<h3 id="返回值-6"><a href="#返回值-6" class="headerlink" title="返回值"></a>返回值</h3><p><strong>如果没有发生错误，accept将返回SOCKET类型的值，该值是新套接字的描述符。 该返回值是实际建立连接的套接字的句柄。</strong>否则，将返回INVALID_SOCKET的值，并且可以通过调用WSAGetLastError来检索特定的错误代码。addrlen引用的整数最初包含addr指向的空间大小。 返回时，它将包含返回地址的实际长度（以字节为单位）</p>
+<h3 id="摘要-2"><a href="#摘要-2" class="headerlink" title="摘要"></a>摘要</h3><p><strong>如果队列上没有挂起的连接，套接字就会被标记为阻塞(blocking)，那么accept函数可以阻塞调用者，直到出现连接为止。</strong>如果套接字被标记为非阻塞，并且队列上没有挂起的连接，则accept将返回错误，成功完成accept返回新的套接字句柄后，不能将接受的套接字用于接受更多连接。原始套接字保持打开状态，并侦听新的连接请求。<strong>参数addr是输出参数，该参数填充有通信层已知的连接实体的地址。</strong> addr参数的确切格式由发生通信的地址族确定。<strong>addrlen是一个值输出参数；它最初应包含addr指向的大小；返回时，它将包含返回地址的实际长度（以字节为单位）。</strong>accept函数与面向连接的套接字类型（例如SOCK_STREAM）一起使用。如果addr和 / 或addrlen等于NULL，则不返回有关已接受套接字的远程地址的信息。</p>
+<h3 id="recv函数原型"><a href="#recv函数原型" class="headerlink" title="recv函数原型"></a>recv函数原型</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">recv</span><span class="params">(</span></span></span><br><span class="line"><span class="function"><span class="params">	_In_   SOCKET s,</span></span></span><br><span class="line"><span class="function"><span class="params">	_Out_  <span class="keyword">char</span> *buf,</span></span></span><br><span class="line"><span class="function"><span class="params">	_In_   <span class="keyword">int</span> len,</span></span></span><br><span class="line"><span class="function"><span class="params">	_In_   <span class="keyword">int</span> flags</span></span></span><br><span class="line"><span class="function"><span class="params">)</span></span>;</span><br></pre></td></tr></table></figure>
+
+<h3 id="参数说明-7"><a href="#参数说明-7" class="headerlink" title="参数说明"></a>参数说明</h3><ul>
+<li><h4 id="s-in-3"><a href="#s-in-3" class="headerlink" title="s[in]"></a>s[in]</h4><p>标识一个连接的套接字</p>
+</li>
+<li><h4 id="buf-out"><a href="#buf-out" class="headerlink" title="buf [out]"></a>buf [out]</h4><p>指向接受数据的缓冲区</p>
+</li>
+<li><h4 id="len-in"><a href="#len-in" class="headerlink" title="len [in]"></a>len [in]</h4><p>缓冲区的长度</p>
+</li>
+<li><h4 id="flags-in"><a href="#flags-in" class="headerlink" title="flags [in]"></a>flags [in]</h4><p>标志位</p>
+</li>
+</ul>
+<h3 id="返回值-7"><a href="#返回值-7" class="headerlink" title="返回值"></a>返回值</h3><p>三种返回值。<br>如果未发生错误，则recv返回接收到的字节数，并且buf参数指向的缓冲区将包含接收到的该数据。<br>如果已正常关闭连接，则返回值为零。<br>否则，返回值SOCKET_ERROR，  通过WSAGetLastError()函数获取具体错误代码</p>
+<h3 id="摘要-3"><a href="#摘要-3" class="headerlink" title="摘要"></a>摘要</h3><p>recv函数用于读取面向连接的套接字或无连接套接字上的传入数据。使用面向连接的协议时，必须在调用recv之前连接套接字。使用无连接协议时，必须在调用recv之前绑定套接字。对于已连接或未连接的套接字，recv函数会限制接收接收消息的地址。该功能仅从连接中指定的远程地址返回消息。来自其他地址的消息被(静默)丢弃。对于面向连接的套接字（例如，类型为SOCK_STREAM），调用recv将返回当前可用的尽可能多的数据-达到指定缓冲区的大小。如果已将套接字配置为在线接收OOB数据（套接字选项SO_OOBINLINE），但尚未读取OOB数据，则仅返回OOB数据。应用程序可以使用ioctlsocket或WSAIoctl SIOCATMARK命令来确定是否还有更多OOB数据需要读取。对于无连接套接字（SOCK_DGRAM类型或其他面向消息的套接字），将从连接功能指定的目标地址的第一个排队数据报(消息)中提取数据。<strong>如果数据报或消息大于指定的缓冲区，则缓冲区将填充数据报的第一部分，并且recv会生成错误WSAEMSGSIZE。对于不可靠的协议(例如UDP)，多余的数据将丢失；对于可靠的协议，服务提供商将保留数据，直到通过调用具有足够大缓冲区的recv成功读取数据为止。</strong></p>
+<p><strong>如果套接字上没有可用的传入数据，则recv调用将阻塞，</strong>并根据为WSARecv定义的阻塞规则等待数据到达，除非套接字未阻塞，否则未设置MSG_PARTIAL标志。在这种情况下，将返回错误代码设置为WSAEWOULDBLOCK的SOCKET_ERROR值。 select，WSAAsyncSelect或WSAEventSelect函数可用于确定何时有更多数据到达。</p>
+<p>flags参数可用于影响函数调用的行为 此函数的语义由套接字选项和flags参数确定。flags参数的可能值是通过将按位或运算符与以下任何值一起使用来构造的。</p>
+<p><strong>MSG_PEEK</strong><br><strong>窥视传入的数据。 数据被复制到缓冲区中，但不会从输入队列中删除。</strong><br>该函数随后返回对recv（或recvfrom）函数的单次调用中可读取的数据量，该数据量可能与套接字上排队的数据总量不同。/在对recv（或recvfrom）函数的单个调用中实际可以读取的数据量被限制为在send或sendto函数调用中写入的数据大小。</p>
+<h3 id="send函数原型"><a href="#send函数原型" class="headerlink" title="send函数原型"></a>send函数原型</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">send</span><span class="params">(</span></span></span><br><span class="line"><span class="function"><span class="params">	_In_       SOCKET s,</span></span></span><br><span class="line"><span class="function"><span class="params">	_In_ <span class="keyword">const</span> <span class="keyword">char</span>   *buf,</span></span></span><br><span class="line"><span class="function"><span class="params">	_In_       <span class="keyword">int</span>    len,</span></span></span><br><span class="line"><span class="function"><span class="params">	_In_       <span class="keyword">int</span>    flags</span></span></span><br><span class="line"><span class="function"><span class="params">)</span></span>;</span><br></pre></td></tr></table></figure>
+
+<h3 id="参数说明-8"><a href="#参数说明-8" class="headerlink" title="参数说明"></a>参数说明</h3><ul>
+<li><h4 id="s-in-4"><a href="#s-in-4" class="headerlink" title="s [in]"></a>s [in]</h4><p>标识一个连接的套接字</p>
+</li>
+<li><h4 id="buf-in"><a href="#buf-in" class="headerlink" title="buf [in]"></a>buf [in]</h4><p>指向要被传输的缓冲区指针</p>
+</li>
+<li><h4 id="len-in-1"><a href="#len-in-1" class="headerlink" title="len [in]"></a>len [in]</h4><p>缓冲区长度</p>
+</li>
+<li><h4 id="flag-int"><a href="#flag-int" class="headerlink" title="flag[int]"></a>flag[int]</h4><p>标志位</p>
+</li>
+</ul>
+<h3 id="返回值-8"><a href="#返回值-8" class="headerlink" title="返回值"></a>返回值</h3><p><strong>如果未发生错误，则send返回已发送的字节总数，该总数可以小于len参数中请求发送的字节数。</strong>否则，将返回SOCKET_ERROR的值，并且可以通过调用WSAGetLastError来检索特定的错误代码。</p>
+<h3 id="摘要-4"><a href="#摘要-4" class="headerlink" title="摘要"></a>摘要</h3><p><strong>对于面向消息的套接字（例如，AF_INET或AF_INET6的地址系列，SOCK_DGRAM的类型以及IPPROTO_UDP的协议），必须注意不要超过基础提供程序的最大数据包大小。</strong>提供者的最大消息包大小可以通过调用optname参数设置为SO_MAX_MSG_SIZE的getsockopt来检索套接字选项的值来获得。<strong>如果数据太长而无法自动通过基础协议，则返回错误WSAEMSGSIZE，并且不会传输任何数据。</strong>成功完成发送功能并不表示数据已成功传递并接收到接收者。此功能仅指示数据已成功发送。</p>
+<p><strong>如果传输系统中没有可用的缓冲区空间来保存要传输的数据，则除非套接字已置于非阻塞模式，否则send将阻塞。</strong>在面向非阻塞流的套接字上，写入的字节数可以在1到请求的长度之间，具体取决于客户端和服务器计算机上的缓冲区可用性。select，WSAAsyncSelect或WSAEventSelect函数可用于确定何时可以发送更多数据，允许使用len参数为零的调用send，实现将其视为成功。在这种情况下，发送将返回零作为有效值。对于面向消息的套接字，将发送零长度的传输数据报。</p>
+<h3 id="shutdown函数原型"><a href="#shutdown函数原型" class="headerlink" title="shutdown函数原型"></a>shutdown函数原型</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">shutdown</span><span class="params">(</span></span></span><br><span class="line"><span class="function"><span class="params">_In_ SOCKET s,</span></span></span><br><span class="line"><span class="function"><span class="params">_In_ <span class="keyword">int</span>    how</span></span></span><br><span class="line"><span class="function"><span class="params">)</span></span>;</span><br></pre></td></tr></table></figure>
+
+<h3 id="参数说明-9"><a href="#参数说明-9" class="headerlink" title="参数说明"></a>参数说明</h3><ul>
+<li><h4 id="s-int"><a href="#s-int" class="headerlink" title="s[int]"></a>s[int]</h4><p>标识一个socket</p>
+</li>
+<li><h4 id="flag-int-1"><a href="#flag-int-1" class="headerlink" title="flag[int]"></a>flag[int]</h4><p>标志位</p>
+</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">SD_RECEIVE	<span class="comment">//Shutdown receive operations.</span></span><br><span class="line">SD_SEND		<span class="comment">//Shutdown send operations.</span></span><br><span class="line">SD_BOTH		<span class="comment">//Shutdown both send and receive operations</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="返回值-9"><a href="#返回值-9" class="headerlink" title="返回值"></a>返回值</h3><p>If no error occurs, shutdown returns zero. Otherwise, a value of SOCKET_ERROR is returned</p>
+<h3 id="摘要-5"><a href="#摘要-5" class="headerlink" title="摘要"></a>摘要</h3><p><strong>关闭功能可用于所有类型的套接字，以禁用接收和 / 或传输。</strong>如果how参数是SD_RECEIVE，则不允许随后调用套接字上的recv函数。这对较低的协议层没有影响。对于TCP套接字，如果套接字上仍有等待接收的数据排队，或者数据随后到达，则将重置连接，因为无法将数据传递给用户。对于UDP套接字，传入的数据报被接受并排队。在任何情况下都不会生成ICMP错误数据包。如果how参数为SD_SEND，则不允许后续调用send函数。对于TCP套接字，将在接收器发送并确认所有数据之后发送FIN。设置SD_BOTH的方式将同时禁用发送和接收，如上所述。</p>
+<p><strong>关闭功能不会关闭套接字。在调用closesocket之前，不会释放连接到套接字的任何资源。为了确保所有数据在关闭之前在连接的套接字上发送和接收，应用程序应在调用closesocket之前使用shutdown关闭连接。</strong></p>
+<p>等待通知远端已发送所有数据并启动正常断开连接的一种方法是使用WSAEventSelect函数，</p>
+<p>如下所示：</p>
+<ul>
+<li>调用WSAEventSelect来注册FD_CLOSE通知。</li>
+<li>使用how = SD_SEND调用关机。接收到FD_CLOSE时</li>
+<li>调用recv或WSARecv，直到函数成功完成并指示已接收到零字节。如果返回了SOCKET_ERROR，则无法正常断开连接。</li>
+<li>调用closesocket。</li>
+</ul>
+<p>等待通知远端已发送所有数据并发起正常断开连接的另一种方法是使用重叠的接收调用：</p>
+<ul>
+<li><p>使用how = SD_SEND调用关机。</p>
+</li>
+<li><p>调用recv或WSARecv，直到函数成功完成并指示已接收到零字节。如果返回了SOCKET_ERROR，则无法正常断开连接。</p>
+</li>
+<li><p>调用closesocket。</p>
+</li>
+</ul>
+<p><strong>注意无论套接字上的SO_LINGER设置如何，关闭功能都不会阻塞。一旦调用了关闭功能以禁用发送，接收或两者都禁用，就没有方法重新为现有套接字连接启用发送或接收。</strong></p>
+<p><strong>在关闭套接字后，应用程序不应依赖于能够重用它。特别是，不需要Windows Sockets提供程序来支持在已关闭的套接字上使用connect。</strong></p>
+<p>如果应用程序要重用套接字，则应在dwFlags参数设置为TF_REUSE_SOCKET的情况下调用DisconnectEx函数，以关闭套接字上的连接并准备要重用的套接字句柄。当DisconnectEx请求完成时，可以将套接字句柄传递给AcceptEx或ConnectEx函数。</p>
+<p>如果应用程序要重用套接字，则可以在将所有数据都排队等待传输并准备要重用的套接字句柄之后，通过将dwFlags参数设置为TF_DISCONNECT和TF_REUSE_SOCKET来调用TransmitFile或TransmitPackets函数。当TransmitFile请求完成时，可以将套接字句柄传递给先前用于建立连接的函数调用，例如AcceptEx或ConnectEx。 TransmitPackets函数完成后，可以将套接字句柄传递给AcceptEx函数。</p>
+<h3 id="closesocket函数原型"><a href="#closesocket函数原型" class="headerlink" title="closesocket函数原型"></a>closesocket函数原型</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">closesocket</span><span class="params">(</span></span></span><br><span class="line"><span class="function"><span class="params">	_In_ SOCKET s</span></span></span><br><span class="line"><span class="function"><span class="params">)</span></span>;</span><br></pre></td></tr></table></figure>
+
+<h3 id="参数说明-10"><a href="#参数说明-10" class="headerlink" title="参数说明"></a>参数说明</h3><ul>
+<li><h4 id="s-in-5"><a href="#s-in-5" class="headerlink" title="s [in]"></a>s [in]</h4><p>标识一个套接字</p>
+</li>
+</ul>
+<h3 id="返回值-10"><a href="#返回值-10" class="headerlink" title="返回值"></a>返回值</h3><p>If no error occurs, closesocket returns zero. Otherwise, a value of SOCKET_ERROR is returned</p>
+<h3 id="摘要-6"><a href="#摘要-6" class="headerlink" title="摘要"></a>摘要</h3><p><strong>closesocket函数关闭套接字。用它释放在s参数中传递的套接字描述符。请注意，一旦发出closesocket函数，在s参数中传递的套接字描述符可能会立即被系统重用</strong>。因此，期望对s参数中传递的套接字描述符的进一步引用失败并出现错误WSAENOTSOCK是不可靠的。Winsock客户端绝不能与另一个Winsock函数调用同时发出closesocket。</p>
 
       
 
@@ -266,7 +426,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2020/06/02/hello-world/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2020/06/06/7.Windows%E4%B8%8B%E7%9A%84socket%E7%A8%8B%E5%BA%8F/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -280,15 +440,20 @@
   
 <nav id="article-nav">
   
-    <a href="/2020/06/04/3.%E9%9D%A2%E5%90%91%E8%BF%9E%E6%8E%A5%E5%92%8C%E6%97%A0%E8%BF%9E%E6%8E%A5%E7%9A%84%E5%A5%97%E6%8E%A5%E5%AD%97%E5%88%B0%E5%BA%95%E6%9C%89%E4%BB%80%E4%B9%88%E5%8C%BA%E5%88%AB/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2020/06/07/8.socket-%E5%87%BD%E6%95%B0%E7%94%A8%E6%B3%95%E8%AF%A6%E8%A7%A3-%E5%88%9B%E5%BB%BA%E5%A5%97%E6%8E%A5%E5%AD%97/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          面向连接和无连接的套接字到底有什么区别?
+          socket函数用法详解:创建套接字
         
       </div>
     </a>
   
+  
+    <a href="/2020/06/04/6.IP%E3%80%81MAC%E5%92%8C%E7%AB%AF%E5%8F%A3%E5%8F%B7-%E7%BD%91%E7%BB%9C%E9%80%9A%E4%BF%A1%E4%B8%AD%E7%A1%AE%E8%AE%A4%E8%BA%AB%E4%BB%BD%E4%BF%A1%E6%81%AF%E7%9A%84%E4%B8%89%E8%A6%81%E7%B4%A0/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">IP、MAC和端口号--网络通信中确认身份信息的三要素</div>
+      <i class="icon-circle-right"></i>
+    </a>
   
 </nav>
 

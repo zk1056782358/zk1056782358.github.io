@@ -6,15 +6,22 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Hexo</title>
+  <title>Select模型 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
-<meta property="og:url" content="http://yoursite.com/index.html">
+  <meta name="description" content="Select模型1.Select模型是什么其实说白了就是对Socket进行管理.有效的进行读写.减少开销. 随着模型等级越高.所需要的知识点就越多.就越来越困难. 2.Select方法1234567int WSAAPI select(  int           nfds,            &#x2F;&#x2F;windows下忽略了， linux下为最大描述符+1  fd_set        *read">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Select模型">
+<meta property="og:url" content="http://yoursite.com/2020/06/14/Select%E6%A8%A1%E5%9E%8B/index.html">
 <meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="Select模型1.Select模型是什么其实说白了就是对Socket进行管理.有效的进行读写.减少开销. 随着模型等级越高.所需要的知识点就越多.就越来越困难. 2.Select方法1234567int WSAAPI select(  int           nfds,            &#x2F;&#x2F;windows下忽略了， linux下为最大描述符+1  fd_set        *read">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://segmentfault.com/img/bVbsQrr?w=407&h=535">
+<meta property="og:image" content="https://segmentfault.com/img/bVbsKNr?w=1165&h=1259">
+<meta property="article:published_time" content="2020-06-14T13:27:57.805Z">
+<meta property="article:modified_time" content="2020-06-14T13:27:57.980Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://segmentfault.com/img/bVbsQrr?w=407&h=535">
   
     <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -150,232 +157,14 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-    <article id="post-Test" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+            <article id="post-Select模型" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2022/09/17/Test/">Test</a>
-    </h1>
-  
-
-        
-        <a href="/2022/09/17/Test/" class="archive-article-date">
-  	<time datetime="2022-09-17T05:55:12.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2022-09-17</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2022/09/17/Test/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-基于TCP的服务器端客户端(1)" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/06/14/%E5%9F%BA%E4%BA%8ETCP%E7%9A%84%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%AB%AF%E5%AE%A2%E6%88%B7%E7%AB%AF(1)/">基于TCP的服务器端客户端(1)</a>
-    </h1>
-  
-
-        
-        <a href="/2020/06/14/%E5%9F%BA%E4%BA%8ETCP%E7%9A%84%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%AB%AF%E5%AE%A2%E6%88%B7%E7%AB%AF(1)/" class="archive-article-date">
-  	<time datetime="2020-06-14T14:12:03.695Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-06-14</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="基于TCP的服务器端-客户端-1"><a href="#基于TCP的服务器端-客户端-1" class="headerlink" title="基于TCP的服务器端/客户端(1)"></a>基于TCP的服务器端/客户端(1)</h2><h3 id="理解TCP和UDP"><a href="#理解TCP和UDP" class="headerlink" title="理解TCP和UDP"></a>理解TCP和UDP</h3><p>根据数据传输方式的不同,基于网络协议的套接字一般分为TCP套接字和UDP套接字。因为TCP套接字是面向链接的，因此又称基于流的套接字。</p>
-<p>TCP是Transmission Control Protocol(传输控制协议)的简写，意为”对数据传输过程的控制”。因此，学习控制方法和范围有助于正确理解TCP套接字。</p>
-<h3 id="TCP-IP协议栈"><a href="#TCP-IP协议栈" class="headerlink" title="TCP/IP协议栈"></a>TCP/IP协议栈</h3><p>应用层-》传输层-》网络层-》数据链路层</p>
-<p>其中TCP UPD在传输层。网络层就是IP层。传输IP数据报。</p>
-<p>通过TCP套接字收发数据时需要借助这4层。</p>
-<p><img src="C:%5CUsers%5CZuoKai%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200614214330591.png" alt="image-20200614214330591"></p>
-<p>反之，通过UDP套接字收发数据时。</p>
-<p><img src="C:%5CUsers%5CZuoKai%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200614214521070.png" alt="image-20200614214521070"></p>
-<p>TCP协议传输过程种可以确认对方是否收到数据,并且重传数据.</p>
-<p><img src="C:%5CUsers%5CZuoKai%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200614214913697.png" alt="image-20200614214913697"></p>
-<h3 id="TCP服务器端的默认函数调用顺序"><a href="#TCP服务器端的默认函数调用顺序" class="headerlink" title="TCP服务器端的默认函数调用顺序"></a>TCP服务器端的默认函数调用顺序</h3><p><img src="C:%5CUsers%5CZuoKai%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200614215621151.png" alt="image-20200614215621151"></p>
-<h3 id="TCP客户端函数调用顺序"><a href="#TCP客户端函数调用顺序" class="headerlink" title="TCP客户端函数调用顺序"></a>TCP客户端函数调用顺序</h3><p><img src="C:%5CUsers%5CZuoKai%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200614215647757.png" alt="image-20200614215647757"></p>
-<p>实现服务器端必经过程之一就是给套接字分配IP和端口号.但客户端实现过程中并未出现套接字地址分配,而是创建套接字后立即调用connect函数.难道客户端套接字无需分配IP和端口?当然不是!网络数据交换必须分配IP和端口号.既然如此,那客户端套接字何时\何地\如何分配地址呢?</p>
-<ul>
-<li>何时?调用connect函数时.</li>
-<li>何地? 操作系统,更准确地说是在内核中.</li>
-<li>如何?IP用计算机(主机)的IP,端口随机分配.</li>
-</ul>
-<p>客户端的IP地址和端口在调用connect函数时自动分配,无需调用bind函数分配.</p>
-<h3 id="基于TCP的服务器端-客户端函数调用关系"><a href="#基于TCP的服务器端-客户端函数调用关系" class="headerlink" title="基于TCP的服务器端/客户端函数调用关系"></a>基于TCP的服务器端/客户端函数调用关系</h3><p><img src="C:%5CUsers%5CZuoKai%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200614220438896.png" alt="image-20200614220438896"></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/06/14/%E5%9F%BA%E4%BA%8ETCP%E7%9A%84%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%AB%AF%E5%AE%A2%E6%88%B7%E7%AB%AF(1)/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-STL六大部件" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/06/14/STL%E5%85%AD%E5%A4%A7%E9%83%A8%E4%BB%B6/">STL六大部件</a>
-    </h1>
-  
-
-        
-        <a href="/2020/06/14/STL%E5%85%AD%E5%A4%A7%E9%83%A8%E4%BB%B6/" class="archive-article-date">
-  	<time datetime="2020-06-14T13:28:02.507Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-06-14</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="STL六大部件"><a href="#STL六大部件" class="headerlink" title="STL六大部件"></a>STL六大部件</h2><ul>
-<li><h3 id="容器"><a href="#容器" class="headerlink" title="容器"></a>容器</h3></li>
-<li><h3 id="分配器"><a href="#分配器" class="headerlink" title="分配器"></a>分配器</h3></li>
-<li><h3 id="算法"><a href="#算法" class="headerlink" title="算法"></a>算法</h3></li>
-<li><h3 id="迭代器"><a href="#迭代器" class="headerlink" title="迭代器"></a>迭代器</h3></li>
-<li><h3 id="适配器"><a href="#适配器" class="headerlink" title="适配器"></a>适配器</h3></li>
-<li><h3 id="仿函数"><a href="#仿函数" class="headerlink" title="仿函数"></a>仿函数</h3></li>
-</ul>
-<p><img src="C:%5CUsers%5CZuoKai%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200610212404980.png" alt="image-20200610212404980"></p>
-<p><img src="C:%5CUsers%5CZuoKai%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20200610220930688.png" alt="image-20200610220930688"></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/06/14/STL%E5%85%AD%E5%A4%A7%E9%83%A8%E4%BB%B6/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Select模型" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/06/14/Select%E6%A8%A1%E5%9E%8B/">Select模型</a>
+    <h1 class="article-title" itemprop="name">
+      Select模型
     </h1>
   
 
@@ -596,6 +385,27 @@
       
 
       
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
     </div>
     <div class="article-info article-info-index">
       
@@ -603,16 +413,84 @@
       
 
       
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/06/14/Select%E6%A8%A1%E5%9E%8B/">展开全文 >></a>
-        </p>
-      
 
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2020/06/14/Select%E6%A8%A1%E5%9E%8B/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
       
       <div class="clearfix"></div>
     </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
+  
+    <a href="/2020/06/14/STL%E5%85%AD%E5%A4%A7%E9%83%A8%E4%BB%B6/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          STL六大部件
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2020/06/14/%E2%80%9Cmt.exe%20%20general%20error%20c101008a%20Failed%20to%20save%20the%20updated%20manifest%20to%20the%20file%E2%80%9D%E9%94%99%E8%AF%AF%E7%9A%84%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">“mt.exe  general error c101008a Failed to save the updated manifest to the file”错误的解决办法</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
 
 <aside class="wrap-side-operation">
     <div class="mod-side-operation">
@@ -632,441 +510,14 @@
 
 
 
-
-  
-    <article id="post-“mt.exe  general error c101008a Failed to save the updated manifest to the file”错误的解决办法" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/06/14/%E2%80%9Cmt.exe%20%20general%20error%20c101008a%20Failed%20to%20save%20the%20updated%20manifest%20to%20the%20file%E2%80%9D%E9%94%99%E8%AF%AF%E7%9A%84%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95/">“mt.exe  general error c101008a Failed to save the updated manifest to the file”错误的解决办法</a>
-    </h1>
-  
-
-        
-        <a href="/2020/06/14/%E2%80%9Cmt.exe%20%20general%20error%20c101008a%20Failed%20to%20save%20the%20updated%20manifest%20to%20the%20file%E2%80%9D%E9%94%99%E8%AF%AF%E7%9A%84%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95/" class="archive-article-date">
-  	<time datetime="2020-06-14T08:07:36.782Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-06-14</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="“mt-exe-general-error-c101008a-Failed-to-save-the-updated-manifest-to-the-file”错误的解决办法"><a href="#“mt-exe-general-error-c101008a-Failed-to-save-the-updated-manifest-to-the-file”错误的解决办法" class="headerlink" title="“mt.exe : general error c101008a: Failed to save the updated manifest to the file”错误的解决办法"></a>“mt.exe : general error c101008a: Failed to save the updated manifest to the file”错误的解决办法</h1><p>解决的方法：点class view中的工程，选右鍵，再点clean就可以了； 或者是 build-&gt;clean solusion。</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/06/14/%E2%80%9Cmt.exe%20%20general%20error%20c101008a%20Failed%20to%20save%20the%20updated%20manifest%20to%20the%20file%E2%80%9D%E9%94%99%E8%AF%AF%E7%9A%84%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-192.168.0.1 和 127.0.0.1的区别" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/06/10/192.168.0.1%20%E5%92%8C%20127.0.0.1%E7%9A%84%E5%8C%BA%E5%88%AB/">192.168.0.1 和 127.0.0.1的区别</a>
-    </h1>
-  
-
-        
-        <a href="/2020/06/10/192.168.0.1%20%E5%92%8C%20127.0.0.1%E7%9A%84%E5%8C%BA%E5%88%AB/" class="archive-article-date">
-  	<time datetime="2020-06-10T13:14:32.531Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-06-10</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="192-168-0-1-和-127-0-0-1的区别"><a href="#192-168-0-1-和-127-0-0-1的区别" class="headerlink" title="192.168.0.1 和 127.0.0.1的区别"></a>192.168.0.1 和 127.0.0.1的区别</h1><p>127.0.0.1只能本机访问，192.168.0.1可以被局域网访问。</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/06/10/192.168.0.1%20%E5%92%8C%20127.0.0.1%E7%9A%84%E5%8C%BA%E5%88%AB/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-如何解决windows.h头文件和winsock2.h头文件重定义问题" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/06/09/%E5%A6%82%E4%BD%95%E8%A7%A3%E5%86%B3windows.h%E5%A4%B4%E6%96%87%E4%BB%B6%E5%92%8Cwinsock2.h%E5%A4%B4%E6%96%87%E4%BB%B6%E9%87%8D%E5%AE%9A%E4%B9%89%E9%97%AE%E9%A2%98/">如何解决windows.h头文件和winsock2.h头文件重定义问题</a>
-    </h1>
-  
-
-        
-        <a href="/2020/06/09/%E5%A6%82%E4%BD%95%E8%A7%A3%E5%86%B3windows.h%E5%A4%B4%E6%96%87%E4%BB%B6%E5%92%8Cwinsock2.h%E5%A4%B4%E6%96%87%E4%BB%B6%E9%87%8D%E5%AE%9A%E4%B9%89%E9%97%AE%E9%A2%98/" class="archive-article-date">
-  	<time datetime="2020-06-09T13:39:36.483Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-06-09</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="如何解决windows-h头文件和winsock2-h头文件重定义问题"><a href="#如何解决windows-h头文件和winsock2-h头文件重定义问题" class="headerlink" title="如何解决windows.h头文件和winsock2.h头文件重定义问题"></a>如何解决windows.h头文件和winsock2.h头文件重定义问题</h1><h2 id="第一种方法"><a href="#第一种方法" class="headerlink" title="第一种方法"></a>第一种方法</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//解决下面重定义的问题</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> WIN32_LEAN_AND_MEAN				</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//已经包含了winsock1.x版本的定义，没有上面的define会报重定义</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;windows.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;winsock2.h&gt;</span></span></span><br></pre></td></tr></table></figure>
-
-<h2 id="第二种方法"><a href="#第二种方法" class="headerlink" title="第二种方法"></a>第二种方法</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;winsock2.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;windows.h&gt;</span></span></span><br></pre></td></tr></table></figure>
-
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/06/09/%E5%A6%82%E4%BD%95%E8%A7%A3%E5%86%B3windows.h%E5%A4%B4%E6%96%87%E4%BB%B6%E5%92%8Cwinsock2.h%E5%A4%B4%E6%96%87%E4%BB%B6%E9%87%8D%E5%AE%9A%E4%B9%89%E9%97%AE%E9%A2%98/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-1-理解网络编程和套接字" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/06/08/1-%E7%90%86%E8%A7%A3%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B%E5%92%8C%E5%A5%97%E6%8E%A5%E5%AD%97/">1.理解网络编程和套接字</a>
-    </h1>
-  
-
-        
-        <a href="/2020/06/08/1-%E7%90%86%E8%A7%A3%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B%E5%92%8C%E5%A5%97%E6%8E%A5%E5%AD%97/" class="archive-article-date">
-  	<time datetime="2020-06-08T14:14:17.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-06-08</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/06/08/1-%E7%90%86%E8%A7%A3%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B%E5%92%8C%E5%A5%97%E6%8E%A5%E5%AD%97/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-24-基于UDP的服务器端和客户端" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/06/07/24-%E5%9F%BA%E4%BA%8EUDP%E7%9A%84%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%AB%AF%E5%92%8C%E5%AE%A2%E6%88%B7%E7%AB%AF/">24.基于UDP的服务器端和客户端</a>
-    </h1>
-  
-
-        
-        <a href="/2020/06/07/24-%E5%9F%BA%E4%BA%8EUDP%E7%9A%84%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%AB%AF%E5%92%8C%E5%AE%A2%E6%88%B7%E7%AB%AF/" class="archive-article-date">
-  	<time datetime="2020-06-07T14:26:58.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-06-07</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>前面的文章中我们给出了几个 TCP 的例子，对于 UDP 而言，只要能理解前面的内容，实现并非难事。</p>
-<h2 id="UDP中的服务器端和客户端没有连接"><a href="#UDP中的服务器端和客户端没有连接" class="headerlink" title="UDP中的服务器端和客户端没有连接"></a>UDP中的服务器端和客户端没有连接</h2><p>UDP 不像 TCP，无需在连接状态下交换数据，因此基于 UDP 的服务器端和客户端也无需经过连接过程。也就是说，不必调用 listen() 和 accept() 函数。UDP 中只有创建套接字的过程和数据交换的过程。</p>
-<h2 id="UDP服务器端和客户端均只需1个套接字"><a href="#UDP服务器端和客户端均只需1个套接字" class="headerlink" title="UDP服务器端和客户端均只需1个套接字"></a>UDP服务器端和客户端均只需1个套接字</h2><p>TCP 中，套接字是一对一的关系。如要向 10 个客户端提供服务，那么除了负责监听的套接字外，还需要创建 10 套接字。但在 UDP 中，不管是服务器端还是客户端都只需要 1 个套接字。之前解释 UDP 原理的时候举了邮寄包裹的例子，负责邮寄包裹的快递公司可以比喻为 UDP 套接字，只要有 1 个快递公司，就可以通过它向任意地址邮寄包裹。同样，只需 1 个 UDP 套接字就可以向任意主机传送数据。</p>
-<h2 id="基于UDP的接收和发送函数"><a href="#基于UDP的接收和发送函数" class="headerlink" title="基于UDP的接收和发送函数"></a>基于UDP的接收和发送函数</h2><p>创建好 TCP 套接字后，传输数据时无需再添加地址信息，因为 TCP 套接字将保持与对方套接字的连接。换言之，TCP 套接字知道目标地址信息。但 UDP 套接字不会保持连接状态，每次传输数据都要添加目标地址信息，这相当于在邮寄包裹前填写收件人地址。</p>
-<p>发送数据使用 sendto() 函数：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">ssize_t</span> <span class="title">sendto</span><span class="params">(<span class="keyword">int</span> sock, <span class="keyword">void</span> *buf, <span class="keyword">size_t</span> nbytes, <span class="keyword">int</span> flags, struct sockaddr *to, <span class="keyword">socklen_t</span> addrlen)</span></span>;  <span class="comment">//Linux</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">sendto</span><span class="params">(SOCKET sock, <span class="keyword">const</span> <span class="keyword">char</span> *buf, <span class="keyword">int</span> nbytes, <span class="keyword">int</span> flags, <span class="keyword">const</span> struct sockadr *to, <span class="keyword">int</span> addrlen)</span></span>;  <span class="comment">//Windows</span></span><br></pre></td></tr></table></figure>
-
-<p>Linux 和 Windows 下的 sendto() 函数类似，下面是详细参数说明：</p>
-<ul>
-<li>sock：用于传输 UDP 数据的套接字；</li>
-<li>buf：保存待传输数据的缓冲区地址；</li>
-<li>nbytes：待传输数据的长度（以字节计）；</li>
-<li>flags：可选项参数，若没有可传递 0；</li>
-<li>to：存有目标地址信息的 sockaddr 结构体变量的地址；</li>
-<li>addrlen：传递给参数 to 的地址值结构体变量的长度。</li>
-</ul>
-<p>UDP 发送函数 sendto() 与TCP发送函数 write()/send() 的最大区别在于，sendto() 函数需要向他传递目标地址信息。</p>
-<p>接收数据使用 recvfrom() 函数：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">ssize_t</span> <span class="title">recvfrom</span><span class="params">(<span class="keyword">int</span> sock, <span class="keyword">void</span> *buf, <span class="keyword">size_t</span> nbytes, <span class="keyword">int</span> flags, struct sockadr *from, <span class="keyword">socklen_t</span> *addrlen)</span></span>;  <span class="comment">//Linux</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">recvfrom</span><span class="params">(SOCKET sock, <span class="keyword">char</span> *buf, <span class="keyword">int</span> nbytes, <span class="keyword">int</span> flags, <span class="keyword">const</span> struct sockaddr *from, <span class="keyword">int</span> *addrlen)</span></span>;  <span class="comment">//Windows</span></span><br></pre></td></tr></table></figure>
-
-<p>由于 UDP 数据的发送端不定，所以 recvfrom() 函数定义为可接收发送端信息的形式，具体参数如下：</p>
-<ul>
-<li>sock：用于接收 UDP 数据的套接字；</li>
-<li>buf：保存接收数据的缓冲区地址；</li>
-<li>nbytes：可接收的最大字节数（不能超过 buf 缓冲区的大小）；</li>
-<li>flags：可选项参数，若没有可传递 0；</li>
-<li>from：存有发送端地址信息的 sockaddr 结构体变量的地址；</li>
-<li>addrlen：保存参数 from 的结构体变量长度的变量地址值。</li>
-</ul>
-<h2 id="基于UDP的回声服务器端-客户端"><a href="#基于UDP的回声服务器端-客户端" class="headerlink" title="基于UDP的回声服务器端/客户端"></a>基于UDP的回声服务器端/客户端</h2><p>下面结合之前的内容实现回声客户端。需要注意的是，UDP 不同于 TCP，不存在请求连接和受理过程，因此在某种意义上无法明确区分服务器端和客户端，只是因为其提供服务而称为服务器端，希望各位读者不要误解。</p>
-<p>下面给出 Windows 下的代码，Linux 与此类似，不再赘述。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;winsock2.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">pragma</span> comment (lib, <span class="meta-string">"ws2_32.lib"</span>)  <span class="comment">//加载 ws2_32.dll</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> BUF_SIZE 100</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    WSADATA wsaData;</span><br><span class="line">    WSAStartup( MAKEWORD(<span class="number">2</span>, <span class="number">2</span>), &amp;wsaData);</span><br><span class="line"></span><br><span class="line">    <span class="comment">//创建套接字</span></span><br><span class="line">    SOCKET sock = socket(AF_INET, SOCK_DGRAM, <span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">//绑定套接字</span></span><br><span class="line">    sockaddr_in servAddr;</span><br><span class="line">    <span class="built_in">memset</span>(&amp;servAddr, <span class="number">0</span>, <span class="keyword">sizeof</span>(servAddr));  <span class="comment">//每个字节都用0填充</span></span><br><span class="line">    servAddr.sin_family = PF_INET;  <span class="comment">//使用IPv4地址</span></span><br><span class="line">    servAddr.sin_addr.s_addr = htonl(INADDR_ANY); <span class="comment">//自动获取IP地址</span></span><br><span class="line">    servAddr.sin_port = htons(<span class="number">1234</span>);  <span class="comment">//端口</span></span><br><span class="line">    bind(sock, (SOCKADDR*)&amp;servAddr, <span class="keyword">sizeof</span>(SOCKADDR));</span><br><span class="line"></span><br><span class="line">    <span class="comment">//接收客户端请求</span></span><br><span class="line">    SOCKADDR clntAddr;  <span class="comment">//客户端地址信息</span></span><br><span class="line">    <span class="keyword">int</span> nSize = <span class="keyword">sizeof</span>(SOCKADDR);</span><br><span class="line">    <span class="keyword">char</span> <span class="built_in">buffer</span>[BUF_SIZE];  <span class="comment">//缓冲区</span></span><br><span class="line">    <span class="keyword">while</span>(<span class="number">1</span>)&#123;</span><br><span class="line">        <span class="keyword">int</span> strLen = recvfrom(sock, <span class="built_in">buffer</span>, BUF_SIZE, <span class="number">0</span>, &amp;clntAddr, &amp;nSize);</span><br><span class="line">        sendto(sock, <span class="built_in">buffer</span>, strLen, <span class="number">0</span>, &amp;clntAddr, nSize);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    closesocket(sock);</span><br><span class="line">    WSACleanup();</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>代码说明：</p>
-<p>1) 第 12 行代码在创建套接字时，向 socket() 第二个参数传递 SOCK_DGRAM，以指明使用 UDP 协议。</p>
-<p>2) 第 18 行代码中使用<code>htonl(INADDR_ANY)</code>来自动获取 IP 地址。</p>
-<p>利用常数 INADDR_ANY 自动获取 IP 地址有一个明显的好处，就是当软件安装到其他服务器或者服务器 IP 地址改变时，不用再更改源码重新编译，也不用在启动软件时手动输入。而且，如果一台计算机中已分配多个 IP 地址（例如路由器），那么只要端口号一致，就可以从不同的 IP 地址接收数据。所以，服务器中优先考虑使用 INADDR_ANY；而客户端中除非带有一部分服务器功能，否则不会采用。</p>
-<p>客户端 client.cpp：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;WinSock2.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">pragma</span> comment(lib, <span class="meta-string">"ws2_32.lib"</span>)  <span class="comment">//加载 ws2_32.dll</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> BUF_SIZE 100</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="comment">//初始化DLL</span></span><br><span class="line">    WSADATA wsaData;</span><br><span class="line">    WSAStartup(MAKEWORD(<span class="number">2</span>, <span class="number">2</span>), &amp;wsaData);</span><br><span class="line"></span><br><span class="line">    <span class="comment">//创建套接字</span></span><br><span class="line">    SOCKET sock = socket(PF_INET, SOCK_DGRAM, <span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">//服务器地址信息</span></span><br><span class="line">    sockaddr_in servAddr;</span><br><span class="line">    <span class="built_in">memset</span>(&amp;servAddr, <span class="number">0</span>, <span class="keyword">sizeof</span>(servAddr));  <span class="comment">//每个字节都用0填充</span></span><br><span class="line">    servAddr.sin_family = PF_INET;</span><br><span class="line">    servAddr.sin_addr.s_addr = inet_addr(<span class="string">"127.0.0.1"</span>);</span><br><span class="line">    servAddr.sin_port = htons(<span class="number">1234</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">//不断获取用户输入并发送给服务器，然后接受服务器数据</span></span><br><span class="line">    sockaddr fromAddr;</span><br><span class="line">    <span class="keyword">int</span> addrLen = <span class="keyword">sizeof</span>(fromAddr);</span><br><span class="line">    <span class="keyword">while</span>(<span class="number">1</span>)&#123;</span><br><span class="line">        <span class="keyword">char</span> <span class="built_in">buffer</span>[BUF_SIZE] = &#123;<span class="number">0</span>&#125;;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"Input a string: "</span>);</span><br><span class="line">        gets(<span class="built_in">buffer</span>);</span><br><span class="line">        sendto(sock, <span class="built_in">buffer</span>, <span class="built_in">strlen</span>(<span class="built_in">buffer</span>), <span class="number">0</span>, (struct sockaddr*)&amp;servAddr, <span class="keyword">sizeof</span>(servAddr));</span><br><span class="line">        <span class="keyword">int</span> strLen = recvfrom(sock, <span class="built_in">buffer</span>, BUF_SIZE, <span class="number">0</span>, &amp;fromAddr, &amp;addrLen);</span><br><span class="line">        <span class="built_in">buffer</span>[strLen] = <span class="number">0</span>;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"Message form server: %s\n"</span>, <span class="built_in">buffer</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    closesocket(sock);</span><br><span class="line">    WSACleanup();</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>先运行 server，再运行 client，client 输出结果为：</p>
-<p>Input a string: C语言中文网<br>Message form server: C语言中文网<br>Input a string: c.biancheng.net Founded in 2012<br>Message form server: c.biancheng.net Founded in 2012<br>Input a string:</p>
-<p>从代码中可以看出，server.cpp 中没有使用 listen() 函数，client.cpp 中也没有使用 connect() 函数，因为 UDP 不需要连接。</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/06/07/24-%E5%9F%BA%E4%BA%8EUDP%E7%9A%84%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%AB%AF%E5%92%8C%E5%AE%A2%E6%88%B7%E7%AB%AF/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-23-再谈UDP和TCP" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2020/06/07/23-%E5%86%8D%E8%B0%88UDP%E5%92%8CTCP/">23.再谈UDP和TCP</a>
-    </h1>
-  
-
-        
-        <a href="/2020/06/07/23-%E5%86%8D%E8%B0%88UDP%E5%92%8CTCP/" class="archive-article-date">
-  	<time datetime="2020-06-07T14:25:25.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-06-07</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>TCP 是面向连接的传输协议，建立连接时要经过三次握手，断开连接时要经过四次握手，中间传输数据时也要回复 ACK 包确认，多种机制保证了数据能够正确到达，不会丢失或出错。</p>
-<p>UDP 是非连接的传输协议，没有建立连接和断开连接的过程，它只是简单地把数据丢到网络中，也不需要 ACK 包确认。</p>
-<p>UDP 传输数据就好像我们邮寄包裹，邮寄前需要填好寄件人和收件人地址，之后送到快递公司即可，但包裹是否正确送达、是否损坏我们无法得知，也无法保证。UDP 协议也是如此，它只管把数据包发送到网络，然后就不管了，如果数据丢失或损坏，发送端是无法知道的，当然也不会重发。</p>
-<p>既然如此，TCP 应该是更加优质的传输协议吧？</p>
-<p>如果只考虑可靠性，TCP 的确比 UDP 好。但 UDP 在结构上比 TCP 更加简洁，不会发送 ACK 的应答消息，也不会给数据包分配 Seq 序号，所以 UDP 的传输效率有时会比 TCP 高出很多，编程中实现 UDP 也比 TCP 简单。</p>
-<p>UDP 的可靠性虽然比不上TCP，但也不会像想象中那么频繁地发生数据损毁，在更加重视传输效率而非可靠性的情况下，UDP 是一种很好的选择。比如视频通信或音频通信，就非常适合采用 UDP 协议；通信时数据必须高效传输才不会产生“卡顿”现象，用户体验才更加流畅，如果丢失几个数据包，视频画面可能会出现“雪花”，音频可能会夹带一些杂音，这些都是无妨的。</p>
-<p>与 UDP 相比，TCP 的生命在于流控制，这保证了数据传输的正确性。</p>
-<p>最后需要说明的是：TCP 的速度无法超越 UDP，但在收发某些类型的数据时有可能接近 UDP。例如，每次交换的数据量越大，TCP 的传输速率就越接近于 UDP。</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2020/06/07/23-%E5%86%8D%E8%B0%88UDP%E5%92%8CTCP/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
   
   
-    <nav id="page-nav">
-      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/2/">Next &amp;raquo;</a>
-    </nav>
+  
+
+  
+
+  
+
   
 
 
@@ -1089,8 +540,8 @@
     <script>
 	var yiliaConfig = {
 		mathjax: false,
-		isHome: true,
-		isPost: false,
+		isHome: false,
+		isPost: true,
 		isArchive: false,
 		isTag: false,
 		isCategory: false,

@@ -6,17 +6,17 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Hello World | Hexo</title>
+  <title>如何解决windows.h头文件和winsock2.h头文件重定义问题 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+  <meta name="description" content="如何解决windows.h头文件和winsock2.h头文件重定义问题第一种方法123456&#x2F;&#x2F;解决下面重定义的问题#define WIN32_LEAN_AND_MEAN				&#x2F;&#x2F;已经包含了winsock1.x版本的定义，没有上面的define会报重定义#include &lt;windows.h&gt;#include &lt;winsock2.h&gt;  第二种方法12#include &amp;">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Hello World">
-<meta property="og:url" content="http://yoursite.com/2020/06/02/hello-world/index.html">
+<meta property="og:title" content="如何解决windows.h头文件和winsock2.h头文件重定义问题">
+<meta property="og:url" content="http://yoursite.com/2020/06/09/%E5%A6%82%E4%BD%95%E8%A7%A3%E5%86%B3windows.h%E5%A4%B4%E6%96%87%E4%BB%B6%E5%92%8Cwinsock2.h%E5%A4%B4%E6%96%87%E4%BB%B6%E9%87%8D%E5%AE%9A%E4%B9%89%E9%97%AE%E9%A2%98/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+<meta property="og:description" content="如何解决windows.h头文件和winsock2.h头文件重定义问题第一种方法123456&#x2F;&#x2F;解决下面重定义的问题#define WIN32_LEAN_AND_MEAN				&#x2F;&#x2F;已经包含了winsock1.x版本的定义，没有上面的define会报重定义#include &lt;windows.h&gt;#include &lt;winsock2.h&gt;  第二种方法12#include &amp;">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2020-06-02T15:50:02.709Z">
-<meta property="article:modified_time" content="2020-06-02T15:50:02.709Z">
+<meta property="article:published_time" content="2020-06-09T13:39:36.483Z">
+<meta property="article:modified_time" content="2020-06-09T13:39:37.063Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary">
   
@@ -154,39 +154,30 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-hello-world" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-如何解决windows.h头文件和winsock2.h头文件重定义问题" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      Hello World
+      如何解决windows.h头文件和winsock2.h头文件重定义问题
     </h1>
   
 
         
-        <a href="/2020/06/02/hello-world/" class="archive-article-date">
-  	<time datetime="2020-06-02T15:50:02.709Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-06-02</time>
+        <a href="/2020/06/09/%E5%A6%82%E4%BD%95%E8%A7%A3%E5%86%B3windows.h%E5%A4%B4%E6%96%87%E4%BB%B6%E5%92%8Cwinsock2.h%E5%A4%B4%E6%96%87%E4%BB%B6%E9%87%8D%E5%AE%9A%E4%B9%89%E9%97%AE%E9%A2%98/" class="archive-article-date">
+  	<time datetime="2020-06-09T13:39:36.483Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2020-06-09</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
+        <h1 id="如何解决windows-h头文件和winsock2-h头文件重定义问题"><a href="#如何解决windows-h头文件和winsock2-h头文件重定义问题" class="headerlink" title="如何解决windows.h头文件和winsock2.h头文件重定义问题"></a>如何解决windows.h头文件和winsock2.h头文件重定义问题</h1><h2 id="第一种方法"><a href="#第一种方法" class="headerlink" title="第一种方法"></a>第一种方法</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//解决下面重定义的问题</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> WIN32_LEAN_AND_MEAN				</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//已经包含了winsock1.x版本的定义，没有上面的define会报重定义</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;windows.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;winsock2.h&gt;</span></span></span><br></pre></td></tr></table></figure>
 
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+<h2 id="第二种方法"><a href="#第二种方法" class="headerlink" title="第二种方法"></a>第二种方法</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;winsock2.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;windows.h&gt;</span></span></span><br></pre></td></tr></table></figure>
 
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html" target="_blank" rel="noopener">Deployment</a></p>
 
       
 
@@ -266,7 +257,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2020/06/02/hello-world/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2020/06/09/%E5%A6%82%E4%BD%95%E8%A7%A3%E5%86%B3windows.h%E5%A4%B4%E6%96%87%E4%BB%B6%E5%92%8Cwinsock2.h%E5%A4%B4%E6%96%87%E4%BB%B6%E9%87%8D%E5%AE%9A%E4%B9%89%E9%97%AE%E9%A2%98/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -280,15 +271,20 @@
   
 <nav id="article-nav">
   
-    <a href="/2020/06/04/3.%E9%9D%A2%E5%90%91%E8%BF%9E%E6%8E%A5%E5%92%8C%E6%97%A0%E8%BF%9E%E6%8E%A5%E7%9A%84%E5%A5%97%E6%8E%A5%E5%AD%97%E5%88%B0%E5%BA%95%E6%9C%89%E4%BB%80%E4%B9%88%E5%8C%BA%E5%88%AB/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2020/06/10/192.168.0.1%20%E5%92%8C%20127.0.0.1%E7%9A%84%E5%8C%BA%E5%88%AB/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          面向连接和无连接的套接字到底有什么区别?
+          192.168.0.1 和 127.0.0.1的区别
         
       </div>
     </a>
   
+  
+    <a href="/2020/06/08/1-%E7%90%86%E8%A7%A3%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B%E5%92%8C%E5%A5%97%E6%8E%A5%E5%AD%97/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">1.理解网络编程和套接字</div>
+      <i class="icon-circle-right"></i>
+    </a>
   
 </nav>
 
