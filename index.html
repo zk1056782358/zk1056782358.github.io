@@ -221,7 +221,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2022/09/17/Hexo%E5%86%99%E6%96%87%E7%AB%A0%EF%BC%8C%E5%8F%91%E5%B8%83%E6%96%87%E7%AB%A0/">Hexo写文章，发布文章</a>
+      <a class="article-title" href="/2022/09/17/Hexo%E5%86%99%E6%96%87%E7%AB%A0%EF%BC%8C%E5%8F%91%E5%B8%83%E6%96%87%E7%AB%A0/">超详细Hexo+Github博客搭建小白教程</a>
     </h1>
   
 
@@ -234,12 +234,36 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <ul>
-<li>首先在博客根目录下右键打开git bash，安装一个扩展<code>npm i hexo-deployer-git</code>。</li>
-<li>然后输入<code>hexo new post &quot;article title&quot;</code>，新建一篇文章。</li>
-<li>然后打开C:\MyBlog\source_posts的目录，可以发现下面多了一个文件夹和一个<code>.md</code>文件，一个用来存放你的图片等数据，另一个就是你的文章文件啦。</li>
-<li>编写完markdown文件后，根目录下输入<code>hexo g</code>生成静态网页，然后输入<code>hexo s</code>可以本地预览效果，最后输入<code>hexo d</code>上传到github上。这时打开你的github.io主页就能看到发布的文章啦。</li>
-</ul>
+        <p>原文链接:<a href="https://godweiyang.com/2018/04/13/hexo-blog/" target="_blank" rel="noopener">https://godweiyang.com/2018/04/13/hexo-blog/</a></p>
+<h2 id="安装Hexo"><a href="#安装Hexo" class="headerlink" title="安装Hexo"></a>安装Hexo</h2><p>在合适的地方新建一个文件夹，用来存放自己的博客文件，比如我的博客文件都存放在<code>D:\study\program\blog</code>目录下。</p>
+<p>在该目录下右键点击<code>Git Bash Here</code>，打开git的控制台窗口，以后我们所有的操作都在git控制台进行，就不要用Windows自带的控制台了。</p>
+<p>定位到该目录下，输入<code>npm i hexo-cli -g</code>安装Hexo。会有几个报错，无视它就行。</p>
+<p>安装完后输入<code>hexo -v</code>验证是否安装成功。</p>
+<p>然后就要初始化我们的网站，输入<code>hexo init</code>初始化文件夹，接着输入<code>npm install</code>安装必备的组件。</p>
+<p>这样本地的网站配置也弄好啦，输入<code>hexo g</code>生成静态网页，然后输入<code>hexo s</code>打开本地服务器，然后浏览器打开<a href="https://link.zhihu.com/?target=http%3A//localhost%3A4000/">http://localhost:4000/</a>，就可以看到我们的博客啦.</p>
+<p>按<code>ctrl+c</code>关闭本地服务器。</p>
+<h2 id="连接Github与本地"><a href="#连接Github与本地" class="headerlink" title="连接Github与本地"></a>连接Github与本地</h2><p>首先右键打开git bash，然后输入下面命令：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git config --global user.name <span class="string">"godweiyang"</span></span><br><span class="line">git config --global user.email <span class="string">"792321264@qq.com"</span></span><br></pre></td></tr></table></figure>
+
+<p>用户名和邮箱根据你注册github的信息自行修改。</p>
+<p>然后生成密钥SSH key：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -t rsa -C <span class="string">"792321264@qq.com"</span></span><br></pre></td></tr></table></figure>
+
+<p>打开<a href="https://link.zhihu.com/?target=http%3A//github.com/">github</a>，在头像下面点击<code>settings</code>，再点击<code>SSH and GPG keys</code>，新建一个SSH，名字随便。</p>
+<p>git bash中输入</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat ~/.ssh/id_rsa.pub</span><br></pre></td></tr></table></figure>
+
+<p>将输出的内容复制到框中，点击确定保存。</p>
+<p>输入<code>ssh -T git@github.com</code>，如果如下图所示，出现你的用户名，那就成功了。</p>
+<p>打开博客根目录下的<code>_config.yml</code>文件，这是博客的配置文件，在这里你可以修改与博客相关的各种信息。</p>
+<p>修改最后一行的配置：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">deploy:</span><br><span class="line">  <span class="built_in">type</span>: git</span><br><span class="line">  repository: https://github.com/godweiyang/godweiyang.github.io</span><br><span class="line">  branch: master</span><br></pre></td></tr></table></figure>
+
+<p>repository修改为你自己的github项目地址。</p>
+<h2 id="写文章、发布文章"><a href="#写文章、发布文章" class="headerlink" title="写文章、发布文章"></a>写文章、发布文章</h2><p>首先在博客根目录下右键打开git bash，安装一个扩展<code>npm i hexo-deployer-git</code>。</p>
+<p>然后输入<code>hexo new post &quot;article title&quot;</code>，新建一篇文章。</p>
+<p>然后打开<code>D:\study\program\blog\source\_posts</code>的目录，可以发现下面多了一个文件夹和一个<code>.md</code>文件，一个用来存放你的图片等数据，另一个就是你的文章文件啦。</p>
+<p>编写完markdown文件后，根目录下输入<code>hexo g</code>生成静态网页，然后输入<code>hexo s</code>可以本地预览效果，最后输入<code>hexo d</code>上传到github上。这时打开你的github.io主页就能看到发布的文章啦。</p>
 
       
 
