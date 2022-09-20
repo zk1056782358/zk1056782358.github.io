@@ -20,28 +20,32 @@
     var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
-<meta property="og:url" content="http://yoursite.com/index.html">
+  <meta name="description" content="What is the d-pointerIf you have looked into Qt source files like this one, you will find it generously sprinkled with Q_D and Q_Q macros. This article unravels the purpose of these macros. The Q_D an">
+<meta property="og:type" content="article">
+<meta property="og:title" content="D-Pointer">
+<meta property="og:url" content="http://yoursite.com/2022/09/20/D-Pointer/index.html">
 <meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="What is the d-pointerIf you have looked into Qt source files like this one, you will find it generously sprinkled with Q_D and Q_Q macros. This article unravels the purpose of these macros. The Q_D an">
 <meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2022-09-20T14:49:44.000Z">
+<meta property="article:modified_time" content="2022-09-20T15:15:49.614Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://yoursite.com/">
+<link rel="canonical" href="http://yoursite.com/2022/09/20/D-Pointer/">
 
 
 <script id="page-configurations">
   // https://hexo.io/docs/variables.html
   CONFIG.page = {
     sidebar: "",
-    isHome : true,
-    isPost : false,
+    isHome : false,
+    isPost : true,
     lang   : 'en'
   };
 </script>
 
-  <title>Hexo</title>
+  <title>D-Pointer | Hexo</title>
   
 
 
@@ -139,9 +143,10 @@
         <div class="content-wrap">
           
 
-          <div class="content index posts-expand">
+          <div class="content post posts-expand">
             
-      
+
+    
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
@@ -157,10 +162,9 @@
       <meta itemprop="name" content="Hexo">
     </span>
       <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2022/09/20/D-Pointer/" class="post-title-link" itemprop="url">D-Pointer</a>
-        </h2>
+        <h1 class="post-title" itemprop="name headline">
+          D-Pointer
+        </h1>
 
         <div class="post-meta">
             <span class="post-meta-item">
@@ -184,7 +188,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h3 id="What-is-the-d-pointer"><a href="#What-is-the-d-pointer" class="headerlink" title="What is the d-pointer"></a>What is the d-pointer</h3><p>If you have looked into Qt source files like <a href="http://code.qt.io/cgit/qt/qtbase.git/tree/src/widgets/widgets/qlabel.cpp" target="_blank" rel="noopener">this one</a>, you will find it generously sprinkled with <code>Q_D</code> and <code>Q_Q</code> macros. This article unravels the purpose of these macros.</p>
+        <h3 id="What-is-the-d-pointer"><a href="#What-is-the-d-pointer" class="headerlink" title="What is the d-pointer"></a>What is the d-pointer</h3><p>If you have looked into Qt source files like <a href="http://code.qt.io/cgit/qt/qtbase.git/tree/src/widgets/widgets/qlabel.cpp" target="_blank" rel="noopener">this one</a>, you will find it generously sprinkled with <code>Q_D</code> and <code>Q_Q</code> macros. This article unravels the purpose of these macros.</p>
 <p>The <code>Q_D</code> and <code>Q_Q</code> macros are part of a design pattern called the <em>d-pointer</em> (also called the <em><a href="http://en.wikipedia.org/wiki/Opaque_pointer" target="_blank" rel="noopener">opaque pointer</a></em>) where the implementation details of a library may be hidden from its users and changes to the implementation can be made to a library without breaking binary compatibility.</p>
 <p>如果您查看过类似这样的 Qt 源文件，您会发现它大量使用了 Q_D 和 Q_Q 宏。 本文揭示了这些宏的用途。</p>
 <p>Q_D 和 Q_Q 宏是称为 d 指针（也称为不透明指针）的设计模式的一部分，其中库的实现细节可能对其用户隐藏，并且可以在不破坏二进制文件的情况下对库进行实现更改 兼容性。</p>
@@ -322,201 +326,30 @@
 <p>这个想法是 QLabel 提供了一个函数 d_func() 允许访问其私有内部类。 该方法本身是私有的（因为宏位于 qlabel.h 的私有部分中）。 然而 d_func() 可以被 QLabel 的朋友（C++ 朋友）调用。 这主要用于通过 Qt 类访问信息，这些类无法使用公共 api 访问某些 QLabel 信息。 作为一个奇怪的例子，QLabel 可能会跟踪用户点击链接的次数。 但是，没有公共 API 可以访问此信息。 QStatistics 是一个需要此信息的类。 Qt 开发人员会将 QStatistics 添加为 QLabel 的朋友，然后 QStatistics 可以执行 label-&gt;d_func()-&gt;linkClickCount。</p>
 <p>d_func 还具有强制 const 正确性的优点：在 MyClass 的 const 成员函数中，您需要 Q_D(const MyClass)，因此您只能在 MyClassPrivate 中调用 const 成员函数。 使用裸 d_ptr 您还可以调用非常量函数。</p>
 
-      
     </div>
 
     
     
     
+
       <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/09/20/QThread-general-usage/">
+        
 
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-    </span>
 
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2022/09/20/QThread-general-usage/" class="post-title-link" itemprop="url">QThread general usage</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-              
-
-              <time title="Created: 2022-09-20 22:20:40 / Modified: 22:35:30" itemprop="dateCreated datePublished" datetime="2022-09-20T22:20:40+08:00">2022-09-20</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>Threads in an operating system are a very simple thing. Write a function, maybe bundle it with some data and push it onto a newly created thread. Use a mutex or other method to safely communicate with the thread if necessary. Whether it are Win32, POSIX or other threads, they all basically work the same and are quite fool-proof.</p>
-<p>操作系统中的线程是一件非常简单的事情。 编写一个函数，或许将它与一些数据捆绑在一起并将其推送到一个新创建的线程上。 如有必要，使用互斥锁或其他方法安全地与线程通信。 无论是Win32、POSIX还是其他线程，基本上都是一样的，而且相当的万无一失。</p>
-<p>Those who have discovered the joys of the Qt framework may assume that threads in Qt are just like this, and they would be right. However, there are several different ways to use threads in Qt, and it might not be obvious which approach to choose. The article, <a href="http://doc.qt.io/qt-5/threads-technologies.html" target="_blank" rel="noopener">Multithreading Technologies in Qt</a>, compares the different approaches.</p>
-<p>那些发现 Qt 框架的乐趣的人可能会认为 Qt 中的线程就是这样，他们是对的。 然而，在 Qt 中使用线程有几种不同的方法，选择哪种方法可能并不明显。 Qt 中的多线程技术一文比较了不同的方法。</p>
-<p>The rest of this article demonstrates one of these methods: <strong>QThread + a worker QObject</strong>. This method is intended for use cases which involve event-driven programming and signals + slots across threads.</p>
-<p>本文的其余部分演示了其中一种方法：QThread + 一个worker QObject。 此方法适用于涉及事件驱动编程和跨线程信号 + 槽的用例。</p>
-<h3 id="Usage-with-Worker-class"><a href="#Usage-with-Worker-class" class="headerlink" title="Usage with Worker class"></a>Usage with Worker class</h3><p>The main thing in this example to keep in mind when using a QThread is that it’s not a thread. It’s a wrapper around a thread object. This wrapper provides the signals, slots and methods to easily use the thread object within a Qt project. To use it, prepare a QObject subclass with all your desired functionality in it. Then create a new QThread instance, push the QObject onto it using moveToThread(QThread*) of the QObject instance and call start() on the QThread instance. That’s all. You set up the proper signal/slot connections to make it quit properly and such, and that’s all.</p>
-<p>在这个例子中使用 QThread 时要记住的主要事情是它不是线程。 它是一个线程对象的包装器。 这个包装器提供了信号、槽和方法，以便在 Qt 项目中轻松使用线程对象。 要使用它，请准备一个 QObject 子类，其中包含您想要的所有功能。 然后创建一个新的 QThread 实例，使用 QObject 实例的 moveToThread(QThread*) 将 QObject 推送到其上，并在 QThread 实例上调用 start()。 就这样。 您设置了正确的信号/插槽连接以使其正确退出等等，仅此而已。</p>
-<h4 id="Declare-Worker-class"><a href="#Declare-Worker-class" class="headerlink" title="Declare Worker class"></a>Declare Worker class</h4><p>For a basic example, check this class declaration for the Worker class:</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Worker</span> :</span> <span class="keyword">public</span> QObject &#123;</span><br><span class="line">    Q_OBJECT</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    Worker();</span><br><span class="line">    ~Worker();</span><br><span class="line"><span class="keyword">public</span> slots:</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">process</span><span class="params">()</span></span>;</span><br><span class="line">signals:</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">finished</span><span class="params">()</span></span>;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">error</span><span class="params">(QString err)</span></span>;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="comment">// add your variables here</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
-<p>We add at least one public slot which will be used to trigger the instance and make it start processing data once the thread has started. Now, let’s see what the implementation for this basic class looks like.</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">Worker::Worker() &#123; <span class="comment">// Constructor</span></span><br><span class="line">    <span class="comment">// you could copy data from constructor arguments to internal variables here.</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Worker::~Worker() &#123; <span class="comment">// Destructor</span></span><br><span class="line">    <span class="comment">// free resources</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Worker::process</span><span class="params">()</span> </span>&#123; <span class="comment">// Process. Start processing data.</span></span><br><span class="line">    <span class="comment">// allocate resources using new here</span></span><br><span class="line">    qDebug(<span class="string">"Hello World!"</span>);</span><br><span class="line">    <span class="function">emit <span class="title">finished</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>While this Worker class doesn’t do anything special, it nevertheless contains all the required elements. It starts processing when its main function, in this case process(), is called and when it is done it emits the signal finished() which will then be used to trigger the shutdown of the QThread instance it is contained in.</p>
-<p>虽然这个 Worker 类没有做任何特别的事情，但它仍然包含所有必需的元素。 当它的主函数（在本例中为 process()）被调用时，它开始处理，当它完成时，它发出信号 finished()，然后将用于触发它所在的 QThread 实例的关闭。</p>
-<p>By the way, one extremely important thing to note here is that you should NEVER allocate heap objects (using new) in the constructor of the QObject class as this allocation is then performed on the main thread and not on the new QThread instance, meaning that the newly created object is then owned by the main thread and not the QThread instance. This will make your code fail to work. Instead, allocate such resources in the main function slot such as process() in this case as when that is called the object will be on the new thread instance and thus it will own the resource.</p>
-<p>顺便说一句，这里要注意的一件非常重要的事情是，您永远不应该在 QObject 类的构造函数中分配堆对象（使用 new），因为这种分配是在主线程上执行的，而不是在新的 QThread 实例上执行的，这意味着 然后，新创建的对象归主线程所有，而不是 QThread 实例。 这将使您的代码无法正常工作。 相反，在这种情况下，在诸如 process() 之类的主函数槽中分配此类资源，因为当调用该对象时，该对象将位于新线程实例上，因此它将拥有该资源。</p>
-<h4 id="Create-a-new-Worker-instance"><a href="#Create-a-new-Worker-instance" class="headerlink" title="Create a new Worker instance"></a>Create a new Worker instance</h4><p>Now, let’s see how to use this new construction by creating a new Worker instance and putting it on a QThread instance:</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">QThread* thread = <span class="keyword">new</span> QThread();</span><br><span class="line">Worker* worker = <span class="keyword">new</span> Worker();</span><br><span class="line">worker-&gt;moveToThread(thread);</span><br><span class="line"><span class="built_in">connect</span>( worker, &amp;Worker::error, <span class="keyword">this</span>, &amp;MyClass::errorString);</span><br><span class="line"><span class="built_in">connect</span>( thread, &amp;QThread::started, worker, &amp;Worker::<span class="built_in">process</span>);</span><br><span class="line"><span class="built_in">connect</span>( worker, &amp;Worker::finished, thread, &amp;QThread::quit);</span><br><span class="line"><span class="built_in">connect</span>( worker, &amp;Worker::finished, worker, &amp;Worker::deleteLater);</span><br><span class="line"><span class="built_in">connect</span>( thread, &amp;QThread::finished, thread, &amp;QThread::deleteLater);</span><br><span class="line">thread-&gt;start();</span><br></pre></td></tr></table></figure>
-
-<p>The connect() series here is the most crucial part. The first connect() line hooks up the error message signal from the worker to an error processing function in the main thread. The second connects the thread’s started() signal to the processing() slot in the worker, causing it to start.</p>
-<p>这里的connect()系列是最关键的部分。 第一个 connect() 行将来自 worker 的错误消息信号连接到主线程中的错误处理函数。 第二个将线程的 started() 信号连接到 worker 中的 processing() 槽，使其启动。</p>
-<p>Then the clean-up: when the worker instance emits finished(), as we did in the example, it will signal the thread to quit, i.e. shut down. We then mark the worker instance using the same finished() signal for deletion. Finally, to prevent nasty crashes because the thread hasn’t fully shut down yet when it is deleted, we connect the finished() of the thread (not the worker!) to its own deleteLater() slot. This will cause the thread to be deleted only after it has fully shut down.</p>
-<p>然后进行清理：当worker实例发出finished()时，就像我们在示例中所做的那样，它将发出线程退出的信号，即关闭。 然后，我们使用相同的 finished() 信号标记工作实例以进行删除。 最后，为了防止由于线程在被删除时尚未完全关闭而导致的严重崩溃，我们将线程（不是工作线程！）的finished() 连接到它自己的deleteLater() 槽。 这将导致线程仅在完全关闭后才被删除。</p>
-
-      
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2022/09/20/QThread-general-usage/" rel="prev" title="QThread general usage">
+      <i class="fa fa-chevron-left"></i> QThread general usage
+    </a></div>
+      <div class="post-nav-item"></div>
     </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
       </footer>
+    
   </article>
   
   
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/09/17/Hexo%E5%86%99%E6%96%87%E7%AB%A0%EF%BC%8C%E5%8F%91%E5%B8%83%E6%96%87%E7%AB%A0/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2022/09/17/Hexo%E5%86%99%E6%96%87%E7%AB%A0%EF%BC%8C%E5%8F%91%E5%B8%83%E6%96%87%E7%AB%A0/" class="post-title-link" itemprop="url">超详细Hexo+Github博客搭建小白教程</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2022-09-17 13:56:14" itemprop="dateCreated datePublished" datetime="2022-09-17T13:56:14+08:00">2022-09-17</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2022-09-20 21:37:30" itemprop="dateModified" datetime="2022-09-20T21:37:30+08:00">2022-09-20</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>原文链接:<a href="https://godweiyang.com/2018/04/13/hexo-blog/" target="_blank" rel="noopener">https://godweiyang.com/2018/04/13/hexo-blog/</a></p>
-<h2 id="安装Hexo"><a href="#安装Hexo" class="headerlink" title="安装Hexo"></a>安装Hexo</h2><p>在合适的地方新建一个文件夹，用来存放自己的博客文件，比如我的博客文件都存放在<code>D:\study\program\blog</code>目录下。</p>
-<p>在该目录下右键点击<code>Git Bash Here</code>，打开git的控制台窗口，以后我们所有的操作都在git控制台进行，就不要用Windows自带的控制台了。</p>
-<p>定位到该目录下，输入<code>npm i hexo-cli -g</code>安装Hexo。会有几个报错，无视它就行。</p>
-<p>安装完后输入<code>hexo -v</code>验证是否安装成功。</p>
-<p>然后就要初始化我们的网站，输入<code>hexo init</code>初始化文件夹，接着输入<code>npm install</code>安装必备的组件。</p>
-<p>这样本地的网站配置也弄好啦，输入<code>hexo g</code>生成静态网页，然后输入<code>hexo s</code>打开本地服务器，然后浏览器打开<a href="https://link.zhihu.com/?target=http%3A//localhost%3A4000/">http://localhost:4000/</a>，就可以看到我们的博客啦.</p>
-<p>按<code>ctrl+c</code>关闭本地服务器。</p>
-<h2 id="连接Github与本地"><a href="#连接Github与本地" class="headerlink" title="连接Github与本地"></a>连接Github与本地</h2><p>首先右键打开git bash，然后输入下面命令：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git config --global user.name <span class="string">"godweiyang"</span></span><br><span class="line">git config --global user.email <span class="string">"792321264@qq.com"</span></span><br></pre></td></tr></table></figure>
-
-<p>用户名和邮箱根据你注册github的信息自行修改。</p>
-<p>然后生成密钥SSH key：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -t rsa -C <span class="string">"792321264@qq.com"</span></span><br></pre></td></tr></table></figure>
-
-<p>打开<a href="https://link.zhihu.com/?target=http%3A//github.com/">github</a>，在头像下面点击<code>settings</code>，再点击<code>SSH and GPG keys</code>，新建一个SSH，名字随便。</p>
-<p>git bash中输入</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat ~/.ssh/id_rsa.pub</span><br></pre></td></tr></table></figure>
-
-<p>将输出的内容复制到框中，点击确定保存。</p>
-<p>输入<code>ssh -T git@github.com</code>，如果如下图所示，出现你的用户名，那就成功了。</p>
-<p>打开博客根目录下的<code>_config.yml</code>文件，这是博客的配置文件，在这里你可以修改与博客相关的各种信息。</p>
-<p>修改最后一行的配置：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">deploy:</span><br><span class="line">  <span class="built_in">type</span>: git</span><br><span class="line">  repository: https://github.com/godweiyang/godweiyang.github.io</span><br><span class="line">  branch: master</span><br></pre></td></tr></table></figure>
-
-<p>repository修改为你自己的github项目地址。</p>
-<h2 id="写文章、发布文章"><a href="#写文章、发布文章" class="headerlink" title="写文章、发布文章"></a>写文章、发布文章</h2><p>首先在博客根目录下右键打开git bash，安装一个扩展<code>npm i hexo-deployer-git</code>。</p>
-<p>然后输入<code>hexo new post &quot;article title&quot;</code>，新建一篇文章。</p>
-<p>然后打开<code>D:\study\program\blog\source\_posts</code>的目录，可以发现下面多了一个文件夹和一个<code>.md</code>文件，一个用来存放你的图片等数据，另一个就是你的文章文件啦。</p>
-<p>编写完markdown文件后，根目录下输入<code>hexo g</code>生成静态网页，然后输入<code>hexo s</code>可以本地预览效果，最后输入<code>hexo d</code>上传到github上。这时打开你的github.io主页就能看到发布的文章啦。</p>
-<h2 id="修改主题"><a href="#修改主题" class="headerlink" title="修改主题"></a>修改主题</h2><p>把下载的主题的文件放在theme目录下，<a href="https://github.com/iissnan/hexo-theme-next/releases" target="_blank" rel="noopener">https://github.com/iissnan/hexo-theme-next/releases</a></p>
-<p>修改配置文件主题为当前主题名字。</p>
-<p>然后运行<code>hexo clean</code>清空所有生成的网页缓存，<code>hexo g</code>、<code>hexo d</code>。</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-
   
 
 
@@ -569,6 +402,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#What-is-the-d-pointer"><span class="nav-number">1.</span> <span class="nav-text">What is the d-pointer</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Binary-compatibility-—-what-is-that"><span class="nav-number">2.</span> <span class="nav-text">Binary compatibility — what is that?</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#What-breaks-binary-compatibility"><span class="nav-number">3.</span> <span class="nav-text">What breaks binary compatibility?</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Why-did-it-crash"><span class="nav-number">4.</span> <span class="nav-text">Why did it crash?</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Never-change-the-size-of-an-exported-C-class"><span class="nav-number">5.</span> <span class="nav-text">Never change the size of an exported C++ class</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#The-d-pointer"><span class="nav-number">6.</span> <span class="nav-text">The d-pointer</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#widget-h"><span class="nav-number">6.1.</span> <span class="nav-text">widget.h</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#widget-p-h"><span class="nav-number">6.2.</span> <span class="nav-text">widget_p.h</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#widget-cpp"><span class="nav-number">6.3.</span> <span class="nav-text">widget.cpp</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#label-h"><span class="nav-number">6.4.</span> <span class="nav-text">label.h</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#label-cpp"><span class="nav-number">6.5.</span> <span class="nav-text">label.cpp</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Other-benefits-of-d-pointer"><span class="nav-number">7.</span> <span class="nav-text">Other benefits of d-pointer</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#The-q-pointer"><span class="nav-number">8.</span> <span class="nav-text">The q-pointer</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#widget-h-1"><span class="nav-number">8.1.</span> <span class="nav-text">widget.h</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#widget-p-h-1"><span class="nav-number">8.2.</span> <span class="nav-text">widget_p.h</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#widget-cpp-1"><span class="nav-number">8.3.</span> <span class="nav-text">widget.cpp</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#label-h-1"><span class="nav-number">8.4.</span> <span class="nav-text">label.h</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#label-cpp-1"><span class="nav-number">8.5.</span> <span class="nav-text">label.cpp</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Inheriting-d-pointers-for-optimization"><span class="nav-number">9.</span> <span class="nav-text">Inheriting d-pointers for optimization</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#widget-h-2"><span class="nav-number">9.1.</span> <span class="nav-text">widget.h</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#widget-p-h-2"><span class="nav-number">9.2.</span> <span class="nav-text">widget_p.h</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#widget-cpp-2"><span class="nav-number">9.3.</span> <span class="nav-text">widget.cpp</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#label-h-2"><span class="nav-number">9.4.</span> <span class="nav-text">label.h</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#label-cpp-2"><span class="nav-number">9.5.</span> <span class="nav-text">label.cpp</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#d-pointers-in-Qt"><span class="nav-number">10.</span> <span class="nav-text">d-pointers in Qt</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Q-D-and-Q-Q"><span class="nav-number">11.</span> <span class="nav-text">Q_D and Q_Q</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#global-h"><span class="nav-number">11.1.</span> <span class="nav-text">global.h</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#label-cpp-3"><span class="nav-number">11.2.</span> <span class="nav-text">label.cpp</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Q-DECLARE-PRIVATE-and-Q-DECLARE-PUBLIC"><span class="nav-number">12.</span> <span class="nav-text">Q_DECLARE_PRIVATE and Q_DECLARE_PUBLIC</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#qglobal-h"><span class="nav-number">12.1.</span> <span class="nav-text">qglobal.h</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#qlabel-h"><span class="nav-number">12.2.</span> <span class="nav-text">qlabel.h</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 

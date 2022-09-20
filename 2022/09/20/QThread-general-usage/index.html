@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="Threads in an operating system are a very simple thing. Write a function, maybe bundle it with some data and push it onto a newly created thread. Use a mutex or other method to safely communicate with">
+<meta property="og:type" content="article">
+<meta property="og:title" content="QThread general usage">
+<meta property="og:url" content="http://yoursite.com/2022/09/20/QThread-general-usage/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="Threads in an operating system are a very simple thing. Write a function, maybe bundle it with some data and push it onto a newly created thread. Use a mutex or other method to safely communicate with">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2022-09-20T14:20:40.000Z">
+<meta property="article:modified_time" content="2022-09-20T14:35:30.193Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://yoursite.com/2022/09/20/QThread-general-usage/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>QThread general usage | Hexo</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Hexo</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>Archives</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/09/20/QThread-general-usage/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          QThread general usage
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2022-09-20 22:20:40 / Modified: 22:35:30" itemprop="dateCreated datePublished" datetime="2022-09-20T22:20:40+08:00">2022-09-20</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>Threads in an operating system are a very simple thing. Write a function, maybe bundle it with some data and push it onto a newly created thread. Use a mutex or other method to safely communicate with the thread if necessary. Whether it are Win32, POSIX or other threads, they all basically work the same and are quite fool-proof.</p>
+<p>操作系统中的线程是一件非常简单的事情。 编写一个函数，或许将它与一些数据捆绑在一起并将其推送到一个新创建的线程上。 如有必要，使用互斥锁或其他方法安全地与线程通信。 无论是Win32、POSIX还是其他线程，基本上都是一样的，而且相当的万无一失。</p>
+<p>Those who have discovered the joys of the Qt framework may assume that threads in Qt are just like this, and they would be right. However, there are several different ways to use threads in Qt, and it might not be obvious which approach to choose. The article, <a href="http://doc.qt.io/qt-5/threads-technologies.html" target="_blank" rel="noopener">Multithreading Technologies in Qt</a>, compares the different approaches.</p>
+<p>那些发现 Qt 框架的乐趣的人可能会认为 Qt 中的线程就是这样，他们是对的。 然而，在 Qt 中使用线程有几种不同的方法，选择哪种方法可能并不明显。 Qt 中的多线程技术一文比较了不同的方法。</p>
+<p>The rest of this article demonstrates one of these methods: <strong>QThread + a worker QObject</strong>. This method is intended for use cases which involve event-driven programming and signals + slots across threads.</p>
+<p>本文的其余部分演示了其中一种方法：QThread + 一个worker QObject。 此方法适用于涉及事件驱动编程和跨线程信号 + 槽的用例。</p>
+<h3 id="Usage-with-Worker-class"><a href="#Usage-with-Worker-class" class="headerlink" title="Usage with Worker class"></a>Usage with Worker class</h3><p>The main thing in this example to keep in mind when using a QThread is that it’s not a thread. It’s a wrapper around a thread object. This wrapper provides the signals, slots and methods to easily use the thread object within a Qt project. To use it, prepare a QObject subclass with all your desired functionality in it. Then create a new QThread instance, push the QObject onto it using moveToThread(QThread*) of the QObject instance and call start() on the QThread instance. That’s all. You set up the proper signal/slot connections to make it quit properly and such, and that’s all.</p>
+<p>在这个例子中使用 QThread 时要记住的主要事情是它不是线程。 它是一个线程对象的包装器。 这个包装器提供了信号、槽和方法，以便在 Qt 项目中轻松使用线程对象。 要使用它，请准备一个 QObject 子类，其中包含您想要的所有功能。 然后创建一个新的 QThread 实例，使用 QObject 实例的 moveToThread(QThread*) 将 QObject 推送到其上，并在 QThread 实例上调用 start()。 就这样。 您设置了正确的信号/插槽连接以使其正确退出等等，仅此而已。</p>
+<h4 id="Declare-Worker-class"><a href="#Declare-Worker-class" class="headerlink" title="Declare Worker class"></a>Declare Worker class</h4><p>For a basic example, check this class declaration for the Worker class:</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Worker</span> :</span> <span class="keyword">public</span> QObject &#123;</span><br><span class="line">    Q_OBJECT</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    Worker();</span><br><span class="line">    ~Worker();</span><br><span class="line"><span class="keyword">public</span> slots:</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">process</span><span class="params">()</span></span>;</span><br><span class="line">signals:</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">finished</span><span class="params">()</span></span>;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">error</span><span class="params">(QString err)</span></span>;</span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    <span class="comment">// add your variables here</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>We add at least one public slot which will be used to trigger the instance and make it start processing data once the thread has started. Now, let’s see what the implementation for this basic class looks like.</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">Worker::Worker() &#123; <span class="comment">// Constructor</span></span><br><span class="line">    <span class="comment">// you could copy data from constructor arguments to internal variables here.</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Worker::~Worker() &#123; <span class="comment">// Destructor</span></span><br><span class="line">    <span class="comment">// free resources</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Worker::process</span><span class="params">()</span> </span>&#123; <span class="comment">// Process. Start processing data.</span></span><br><span class="line">    <span class="comment">// allocate resources using new here</span></span><br><span class="line">    qDebug(<span class="string">"Hello World!"</span>);</span><br><span class="line">    <span class="function">emit <span class="title">finished</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>While this Worker class doesn’t do anything special, it nevertheless contains all the required elements. It starts processing when its main function, in this case process(), is called and when it is done it emits the signal finished() which will then be used to trigger the shutdown of the QThread instance it is contained in.</p>
+<p>虽然这个 Worker 类没有做任何特别的事情，但它仍然包含所有必需的元素。 当它的主函数（在本例中为 process()）被调用时，它开始处理，当它完成时，它发出信号 finished()，然后将用于触发它所在的 QThread 实例的关闭。</p>
+<p>By the way, one extremely important thing to note here is that you should NEVER allocate heap objects (using new) in the constructor of the QObject class as this allocation is then performed on the main thread and not on the new QThread instance, meaning that the newly created object is then owned by the main thread and not the QThread instance. This will make your code fail to work. Instead, allocate such resources in the main function slot such as process() in this case as when that is called the object will be on the new thread instance and thus it will own the resource.</p>
+<p>顺便说一句，这里要注意的一件非常重要的事情是，您永远不应该在 QObject 类的构造函数中分配堆对象（使用 new），因为这种分配是在主线程上执行的，而不是在新的 QThread 实例上执行的，这意味着 然后，新创建的对象归主线程所有，而不是 QThread 实例。 这将使您的代码无法正常工作。 相反，在这种情况下，在诸如 process() 之类的主函数槽中分配此类资源，因为当调用该对象时，该对象将位于新线程实例上，因此它将拥有该资源。</p>
+<h4 id="Create-a-new-Worker-instance"><a href="#Create-a-new-Worker-instance" class="headerlink" title="Create a new Worker instance"></a>Create a new Worker instance</h4><p>Now, let’s see how to use this new construction by creating a new Worker instance and putting it on a QThread instance:</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">QThread* thread = <span class="keyword">new</span> QThread();</span><br><span class="line">Worker* worker = <span class="keyword">new</span> Worker();</span><br><span class="line">worker-&gt;moveToThread(thread);</span><br><span class="line"><span class="built_in">connect</span>( worker, &amp;Worker::error, <span class="keyword">this</span>, &amp;MyClass::errorString);</span><br><span class="line"><span class="built_in">connect</span>( thread, &amp;QThread::started, worker, &amp;Worker::<span class="built_in">process</span>);</span><br><span class="line"><span class="built_in">connect</span>( worker, &amp;Worker::finished, thread, &amp;QThread::quit);</span><br><span class="line"><span class="built_in">connect</span>( worker, &amp;Worker::finished, worker, &amp;Worker::deleteLater);</span><br><span class="line"><span class="built_in">connect</span>( thread, &amp;QThread::finished, thread, &amp;QThread::deleteLater);</span><br><span class="line">thread-&gt;start();</span><br></pre></td></tr></table></figure>
+
+<p>The connect() series here is the most crucial part. The first connect() line hooks up the error message signal from the worker to an error processing function in the main thread. The second connects the thread’s started() signal to the processing() slot in the worker, causing it to start.</p>
+<p>这里的connect()系列是最关键的部分。 第一个 connect() 行将来自 worker 的错误消息信号连接到主线程中的错误处理函数。 第二个将线程的 started() 信号连接到 worker 中的 processing() 槽，使其启动。</p>
+<p>Then the clean-up: when the worker instance emits finished(), as we did in the example, it will signal the thread to quit, i.e. shut down. We then mark the worker instance using the same finished() signal for deletion. Finally, to prevent nasty crashes because the thread hasn’t fully shut down yet when it is deleted, we connect the finished() of the thread (not the worker!) to its own deleteLater() slot. This will cause the thread to be deleted only after it has fully shut down.</p>
+<p>然后进行清理：当worker实例发出finished()时，就像我们在示例中所做的那样，它将发出线程退出的信号，即关闭。 然后，我们使用相同的 finished() 信号标记工作实例以进行删除。 最后，为了防止由于线程在被删除时尚未完全关闭而导致的严重崩溃，我们将线程（不是工作线程！）的finished() 连接到它自己的deleteLater() 槽。 这将导致线程仅在完全关闭后才被删除。</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2022/09/17/Hexo%E5%86%99%E6%96%87%E7%AB%A0%EF%BC%8C%E5%8F%91%E5%B8%83%E6%96%87%E7%AB%A0/" rel="prev" title="超详细Hexo+Github博客搭建小白教程">
+      <i class="fa fa-chevron-left"></i> 超详细Hexo+Github博客搭建小白教程
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2022/09/20/D-Pointer/" rel="next" title="D-Pointer">
+      D-Pointer <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Usage-with-Worker-class"><span class="nav-number">1.</span> <span class="nav-text">Usage with Worker class</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Declare-Worker-class"><span class="nav-number">1.1.</span> <span class="nav-text">Declare Worker class</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Create-a-new-Worker-instance"><span class="nav-number">1.2.</span> <span class="nav-text">Create a new Worker instance</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">John Doe</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">3</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
