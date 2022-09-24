@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.1">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"yoursite.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="Python GUI框架作为Python开发者，你迟早都会用到图形用户界面来开发应用。常用的GUI框架有Tkinter、PyQT、wxPython、PySide、Kivy等等，各有优缺点。其中PyQt和PySide都是基于QT designer模块，将ui界面翻译为python程序，底层都是调用QT的ui界面库，使用起来基本没有区别。 PyQT的开发商是Riverbank Computing，采用">
+<meta property="og:type" content="article">
+<meta property="og:title" content="VSCode+PySide6开发环境搭建">
+<meta property="og:url" content="http://yoursite.com/2022/09/24/VSCode-PySide6%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="Python GUI框架作为Python开发者，你迟早都会用到图形用户界面来开发应用。常用的GUI框架有Tkinter、PyQT、wxPython、PySide、Kivy等等，各有优缺点。其中PyQt和PySide都是基于QT designer模块，将ui界面翻译为python程序，底层都是调用QT的ui界面库，使用起来基本没有区别。 PyQT的开发商是Riverbank Computing，采用">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2022-09-24T12:07:27.000Z">
+<meta property="article:modified_time" content="2022-09-24T12:13:02.145Z">
+<meta property="article:author" content="John Doe">
+<meta property="article:tag" content="python">
+<meta property="article:tag" content="PySide6">
+<meta property="article:tag" content="VSCode">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://yoursite.com/2022/09/24/VSCode-PySide6%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>VSCode+PySide6开发环境搭建 | Hexo</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Hexo</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>Archives</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2022/09/24/VSCode-PySide6%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          VSCode+PySide6开发环境搭建
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2022-09-24 20:07:27 / Modified: 20:13:02" itemprop="dateCreated datePublished" datetime="2022-09-24T20:07:27+08:00">2022-09-24</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/PyQt/" itemprop="url" rel="index"><span itemprop="name">PyQt</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="Python-GUI框架"><a href="#Python-GUI框架" class="headerlink" title="Python GUI框架"></a>Python GUI框架</h2><p>作为Python开发者，你迟早都会用到图形用户界面来开发应用。常用的GUI框架有Tkinter、PyQT、wxPython、PySide、Kivy等等，各有优缺点。其中PyQt和PySide都是基于QT designer模块，将ui界面翻译为python程序，底层都是调用QT的ui界面库，使用起来基本没有区别。</p>
+<p>PyQT的开发商是Riverbank Computing，采用的是GPLv3许可证和需要购买版权的商业许可证发布的，该许可证允许开发专有应用程序，可以由开发者选择。GPLv3许可证大概意思就是说，使用PyQt后你的程序就必须要开源，如果闭源商用就会违反协议，后果自负。</p>
+<p>PySide的开发商是NOKIA/The Qt Company（也即PySide是QT的亲儿子），采用LGPL协议。LGPL协议是一个商业友好的协议使用 LGPL 协议开发闭源程序，如果你使用动态链接的形式，那么，你可以以任何形式（商业的、非商业的、开源的、非开源的等等）发布你的应用程序。</p>
+<p>PyQT/PySide采用鼠标拖拉的方式直接设计界面，简单快捷，而且可以使用QT强大的底层库，因此是界面设计的首选，但是考虑二者的商业特性以及官方维护，使用PySide作为GUI框架。</p>
+<p><strong>PySide6介绍</strong></p>
+<p>QT官方发布Qt6.0之后，紧接着于2020年12月10日发布了PySide 6，对应C++版的Qt6。从PySide6开始，PySide的命名也会与Qt的大版本号保持一致。需要注意的是使用PySide6开发的程序在默认情况下，不兼容Windows7系统，这也是Qt6所决定的。</p>
+<p>PySide为我们提供了两种开发界面的方式，一种叫QtWidget，是在网上搜到的教程中最常见的方式；另一种叫QML，是一种新型的开发方式，也是Qt正在努力推广的开发方式。在本系列的文章中，我们主要使用QtWidget这种方式，而使用QtWidget开发程序时，也有两种基本的使用方法，一种是通过designer开发界面，另一种是用过代码手动开发界面，这里我们的目的是极简快速入门，所以使用designer这种方便的方式进行开发。</p>
+<h2 id="PySide6安装"><a href="#PySide6安装" class="headerlink" title="PySide6安装"></a><strong>PySide6安装</strong></h2><p>在command中或者vscode的terminal中运行pip命令，采用国内源安装速度较快。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install 包名-i http://pypi.douban.com/simple/ --trusted-host pypi.douban.com</span><br></pre></td></tr></table></figure>
+
+<p>–trusted-host pypi.douban.com 这是为了获得ssl证书的认证</p>
+<h2 id="PyQt扩展安装"><a href="#PyQt扩展安装" class="headerlink" title="PyQt扩展安装"></a>PyQt扩展安装</h2><p>打开VSCode左侧边栏的Extension，搜索pyside或者Qt for Python，点击Install。</p>
+<h2 id="PyQt工具简介"><a href="#PyQt工具简介" class="headerlink" title="PyQt工具简介"></a>PyQt工具简介</h2><p>Qt/PyQt中包括一系列的工具，其中：</p>
+<ul>
+<li>Qt Designer: 用即见即所得的方式设计图形界面，成果表现为扩展名为ui的文件。 可执行文件：designer 。</li>
+<li>UI Compiler: 将上述ui文件“编译”成Python程序。执行该Python程序便可以得ui文件所描述的图形界面。可执行文件: pyuic5。</li>
+<li>Qt Linguist: 语言学家，可以便捷的实现软件的国际化，即生成软件的法语、英语、日语或者其它语种版本。工作模式大致可以描述成：先用pylupdate5扫描源代码中全部可翻译的字符串，然后用linguist翻译相应的字符串至目标语言，接下来用lrelease工具发布。软件运行时，加载法语版本的语言学家文件，软件界面就是法语，加载日语版本的语言学家文件，软件界面就是日语。可执行文件：linguist,pylupdate5,lrelease。</li>
+<li>Resource Compiler: 资源编译器。UI文件设计过程中可以需要使用到各种图片，这些图片以资源文件的形式组织，扩展名为qrc；资源编译器负责将 qrc格式的资源文件编译成py文件，其中，图片被转换成bytes字节流。可执行文件： pyrcc5。</li>
+</ul>
+<h2 id="PyQt扩展的配置"><a href="#PyQt扩展的配置" class="headerlink" title="PyQt扩展的配置"></a>PyQt扩展的配置</h2><p>在Visual Studio Code中的Extensions管理页面，点击Qt for Python扩展的Manage齿轮按钮，</p>
+<p>然后，按照提示逐一设置各种可执行文件/模块的路径及运行参数信息。</p>
+<h2 id="创建新的UI文件"><a href="#创建新的UI文件" class="headerlink" title="创建新的UI文件"></a>创建新的UI文件</h2><p>在Visual Studio Code项目目录的空白位置右击鼠标，选择New Form(Qt Designer UI File)</p>
+<h2 id="打开已有的UI文件"><a href="#打开已有的UI文件" class="headerlink" title="打开已有的UI文件"></a>打开已有的UI文件</h2><p>在Visual Studio Code项目目录中单击打开UI文件（比如下图中的MainWidget.ui)，然后右击鼠标，在弹出菜单中选择Edit Form(Qt Designer UI File)。</p>
+<h2 id="资源文件的编译"><a href="#资源文件的编译" class="headerlink" title="资源文件的编译"></a>资源文件的编译</h2><p>在Visual Studio Code中打开资源文件，如Images.qrc， 然后在编辑框中右击鼠标，并在弹出菜单中选择 Compile Resource File into Qt for Python File。</p>
+<p>资源文件编译后，生成Images_rc.py文件。</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/python/" rel="tag"># python</a>
+              <a href="/tags/PySide6/" rel="tag"># PySide6</a>
+              <a href="/tags/VSCode/" rel="tag"># VSCode</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2022/09/24/Threads-Events-QObjects/" rel="prev" title="Threads Events QObjects">
+      <i class="fa fa-chevron-left"></i> Threads Events QObjects
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2022/09/24/Qt-for-Python-Quick-Start/" rel="next" title="Qt for Python Quick Start">
+      Qt for Python Quick Start <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Python-GUI框架"><span class="nav-number">1.</span> <span class="nav-text">Python GUI框架</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#PySide6安装"><span class="nav-number">2.</span> <span class="nav-text">PySide6安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#PyQt扩展安装"><span class="nav-number">3.</span> <span class="nav-text">PyQt扩展安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#PyQt工具简介"><span class="nav-number">4.</span> <span class="nav-text">PyQt工具简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#PyQt扩展的配置"><span class="nav-number">5.</span> <span class="nav-text">PyQt扩展的配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#创建新的UI文件"><span class="nav-number">6.</span> <span class="nav-text">创建新的UI文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#打开已有的UI文件"><span class="nav-number">7.</span> <span class="nav-text">打开已有的UI文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#资源文件的编译"><span class="nav-number">8.</span> <span class="nav-text">资源文件的编译</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">John Doe</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">8</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">categories</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-name">tags</span>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">John Doe</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
