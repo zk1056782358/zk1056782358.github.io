@@ -28,7 +28,7 @@
 <meta property="og:description" content="Python-QML integrationThis tutorial provides a quick walk-through of a python application that loads, and interacts with a QML file. QML is a declarative language that lets you design UIs faster than">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2022-09-24T13:12:07.000Z">
-<meta property="article:modified_time" content="2022-09-24T13:20:16.595Z">
+<meta property="article:modified_time" content="2022-10-03T10:05:50.523Z">
 <meta property="article:author" content="John Doe">
 <meta property="article:tag" content="python">
 <meta property="article:tag" content="QML">
@@ -174,10 +174,16 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">Posted on</span>
-              
 
-              <time title="Created: 2022-09-24 21:12:07 / Modified: 21:20:16" itemprop="dateCreated datePublished" datetime="2022-09-24T21:12:07+08:00">2022-09-24</time>
+              <time title="Created: 2022-09-24 21:12:07" itemprop="dateCreated datePublished" datetime="2022-09-24T21:12:07+08:00">2022-09-24</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2022-10-03 18:05:50" itemprop="dateModified" datetime="2022-10-03T18:05:50+08:00">2022-10-03</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
@@ -215,6 +221,8 @@
 <p>3.定义 <em>Bridge</em> 类，其中包含了上下文属性的所有逻辑：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># To be used on the @QmlElement decorator</span></span><br><span class="line"><span class="comment"># (QML_IMPORT_MINOR_VERSION is optional)</span></span><br><span class="line">QML_IMPORT_NAME = <span class="string">"io.qt.textproperties"</span></span><br><span class="line">QML_IMPORT_MAJOR_VERSION = <span class="number">1</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="meta">@QmlElement</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Bridge</span><span class="params">(QObject)</span>:</span></span><br><span class="line"></span><br><span class="line"><span class="meta">    @Slot(str, result=str)</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">getColor</span><span class="params">(self, s)</span>:</span></span><br><span class="line">        <span class="keyword">if</span> s.lower() == <span class="string">"red"</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="string">"#ef9a9a"</span></span><br><span class="line">        <span class="keyword">elif</span> s.lower() == <span class="string">"green"</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="string">"#a5d6a7"</span></span><br><span class="line">        <span class="keyword">elif</span> s.lower() == <span class="string">"blue"</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="string">"#90caf9"</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="string">"white"</span></span><br><span class="line"></span><br><span class="line"><span class="meta">    @Slot(float, result=int)</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">getSize</span><span class="params">(self, s)</span>:</span></span><br><span class="line">        size = int(s * <span class="number">34</span>)</span><br><span class="line">        <span class="keyword">if</span> size &lt;= <span class="number">0</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="number">1</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">return</span> size</span><br><span class="line"></span><br><span class="line"><span class="meta">    @Slot(str, result=bool)</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">getItalic</span><span class="params">(self, s)</span>:</span></span><br><span class="line">        <span class="keyword">if</span> s.lower() == <span class="string">"italic"</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">False</span></span><br><span class="line"></span><br><span class="line"><span class="meta">    @Slot(str, result=bool)</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">getBold</span><span class="params">(self, s)</span>:</span></span><br><span class="line">        <span class="keyword">if</span> s.lower() == <span class="string">"bold"</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">False</span></span><br></pre></td></tr></table></figure>
 
+<p>Notice that the registration happens thanks to the <code>QmlElement</code> decorator, that underneath uses the reference to the <code>Bridge</code> class and the variables <code>QML_IMPORT_NAME</code> and <code>QML_IMPORT_MAJOR_VERSION</code>.</p>
+<p>请注意，由于 QmlElement 装饰器，注册发生，它在下面使用对 Bridge 类的引用以及变量 QML_IMPORT_NAME 和 QML_IMPORT_MAJOR_VERSION。</p>
 
     </div>
 
@@ -310,16 +318,16 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">8</span>
+          <span class="site-state-item-count">9</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
-        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-count">5</span>
         <span class="site-state-item-name">categories</span>
       </div>
       <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-count">8</span>
         <span class="site-state-item-name">tags</span>
       </div>
   </nav>
