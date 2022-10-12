@@ -145,6 +145,86 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/06/07/13-%E5%A6%82%E4%BD%95%E8%AE%A9%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%8C%81%E7%BB%AD%E7%9B%91%E5%90%AC%E5%AE%A2%E6%88%B7%E7%AB%AF%E7%9A%84%E8%AF%B7%E6%B1%82/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="John Doe">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hexo">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/06/07/13-%E5%A6%82%E4%BD%95%E8%AE%A9%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%8C%81%E7%BB%AD%E7%9B%91%E5%90%AC%E5%AE%A2%E6%88%B7%E7%AB%AF%E7%9A%84%E8%AF%B7%E6%B1%82/" class="post-title-link" itemprop="url">13.如何让服务器持续监听客户端的请求?</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2020-06-07 21:28:45" itemprop="dateCreated datePublished" datetime="2020-06-07T21:28:45+08:00">2020-06-07</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2022-10-11 22:41:58" itemprop="dateModified" datetime="2022-10-11T22:41:58+08:00">2022-10-11</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Socket/" itemprop="url" rel="index"><span itemprop="name">Socket</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>在之前的案例中，服务端只能接收一个客户端连接，在完成数据收发后，客户端和服务端套接字均会关闭，这在实际的项目开发中，是没有意义的。我们需要实现一个服务端，能够接收多个客户端连接，进行数据收发，使用 while 循环即可。</p>
+<p>服务端代码 server.c：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/socket.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;netinet/in.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;errno.h&gt;</span></span></span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> c, <span class="keyword">char</span> * * v)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">/* 创建Socket */</span></span><br><span class="line">    <span class="keyword">int</span> serverSock = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);</span><br><span class="line">    <span class="keyword">if</span> (serverSock &lt;= <span class="number">0</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"socket error, errno = %d.\n"</span>, errno);</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    <span class="comment">/* 绑定Socket */</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">sockaddr_in</span> <span class="title">addr</span> = &#123;</span><span class="number">0</span>&#125;;</span><br><span class="line">    addr.sin_family = AF_INET;</span><br><span class="line">    addr.sin_port = htons(<span class="number">8093</span>);</span><br><span class="line">    <span class="comment">/* 不指定IP，即绑定所有网卡 */</span></span><br><span class="line">    <span class="comment">//addr.sin_addr.s_addr = inet_addr("127.0.0.1");</span></span><br><span class="line">    <span class="keyword">if</span> (<span class="number">0</span> != bind(serverSock, (struct sockaddr*)&amp;addr, <span class="keyword">sizeof</span>(addr)))</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"bind error, errno = %d.\n"</span>, errno);</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    <span class="comment">/* 启动监听 */</span></span><br><span class="line">    <span class="keyword">if</span> (<span class="number">0</span> != <span class="built_in">listen</span>(serverSock, <span class="number">20</span>))</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"listen error, errno = %d.\n"</span>, errno);</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    <span class="comment">/* 循环接受客户端连接 */</span></span><br><span class="line">    <span class="keyword">while</span> (<span class="number">1</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="class"><span class="keyword">struct</span> <span class="title">sockaddr_in</span> <span class="title">clientAddr</span> = &#123;</span><span class="number">0</span>&#125;;</span><br><span class="line">		<span class="keyword">socklen_t</span> addrLen = <span class="keyword">sizeof</span>(clientAddr);</span><br><span class="line">        <span class="keyword">int</span> clientSock = accept(serverSock, (struct sockaddr*)&amp;clientAddr, &amp;addrLen);</span><br><span class="line">        <span class="keyword">if</span> (clientSock &lt;= <span class="number">0</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">"accept error, errno = %d.\n"</span>, errno);</span><br><span class="line">            <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line"> </span><br><span class="line">        <span class="keyword">char</span> data[] = <span class="string">"Hello, my name is weiyiyi."</span>;</span><br><span class="line">        <span class="keyword">if</span> (<span class="number">-1</span> == send(clientSock, data, <span class="keyword">sizeof</span>(data), <span class="number">0</span>))</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">"send error, errno = %d.\n"</span>, errno);</span><br><span class="line">            <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">		</span><br><span class="line">        <span class="keyword">char</span> buf[<span class="number">512</span>] = &#123;<span class="number">0</span>&#125;;</span><br><span class="line">        <span class="keyword">int</span> recvLen = recv(clientSock, buf, <span class="number">512</span>, <span class="number">0</span>);</span><br><span class="line">        <span class="keyword">if</span> (recvLen &lt; <span class="number">0</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">"recv error, errno = %d.\n"</span>, errno);</span><br><span class="line">            <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line"> </span><br><span class="line">        <span class="keyword">if</span> (<span class="number">-1</span> == send(clientSock, buf, recvLen, <span class="number">0</span>))</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">"send error, errno = %d.\n"</span>, errno);</span><br><span class="line">            <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line"> </span><br><span class="line">        <span class="built_in">close</span>(clientSock);</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    <span class="built_in">close</span>(serverSock);</span><br><span class="line"> </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>客户端代码 client.c：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/socket.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;netinet/in.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;errno.h&gt;</span></span></span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> c, <span class="keyword">char</span> * * v)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">while</span> (<span class="number">1</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="comment">/* 创建Socket */</span></span><br><span class="line">        <span class="keyword">int</span> sock = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);</span><br><span class="line">        <span class="keyword">if</span> (sock &lt;= <span class="number">0</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">"socket error, errno = %d.\n"</span>, errno);</span><br><span class="line">            <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line"> </span><br><span class="line">        <span class="comment">/* 连接服务器 */</span></span><br><span class="line">		<span class="class"><span class="keyword">struct</span> <span class="title">sockaddr_in</span> <span class="title">addr</span> = &#123;</span><span class="number">0</span>&#125;;</span><br><span class="line">        addr.sin_family = AF_INET;</span><br><span class="line">        addr.sin_port   = htons(<span class="number">8093</span>);</span><br><span class="line">        addr.sin_addr.s_addr    = inet_addr(<span class="string">"127.0.0.1"</span>);</span><br><span class="line">        <span class="keyword">if</span> (<span class="built_in">connect</span>(sock, (struct sockaddr*)&amp;addr, <span class="keyword">sizeof</span>(addr)))</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">"connect error, errno = %d.\n"</span>, errno);</span><br><span class="line">            <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line"> </span><br><span class="line">        <span class="keyword">char</span> buf[<span class="number">512</span>] = &#123;<span class="number">0</span>&#125;;</span><br><span class="line">        <span class="keyword">int</span> recvLen = recv(sock, buf, <span class="number">512</span>, <span class="number">0</span>);</span><br><span class="line">		<span class="keyword">if</span> (recvLen &lt; <span class="number">0</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">"recv error, errno = %d.\n"</span>, errno);</span><br><span class="line">            <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line"> </span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"recv data:%s\n"</span>, buf);</span><br><span class="line"> </span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"please input:\n"</span>);</span><br><span class="line">		<span class="built_in">scanf</span>(<span class="string">"%s"</span>, buf);</span><br><span class="line">        <span class="keyword">if</span> (<span class="number">0</span> &gt; send(sock, buf, <span class="built_in">strlen</span>(buf), <span class="number">0</span>))</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">"send error, errno = %d.\n"</span>, errno);</span><br><span class="line">            <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line"> </span><br><span class="line">        recvLen = recv(sock, buf, <span class="number">512</span>, <span class="number">0</span>);</span><br><span class="line">        <span class="keyword">if</span> (recvLen &lt; <span class="number">0</span>)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">"recv error, errno = %d.\n"</span>, errno);</span><br><span class="line">            <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"recv data:%s\n"</span>, buf);</span><br><span class="line"> </span><br><span class="line">        <span class="built_in">close</span>(sock);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/06/07/12-socket%E7%BC%96%E7%A8%8B%E5%AE%9E%E7%8E%B0%E5%9B%9E%E5%A3%B0%E5%AE%A2%E6%88%B7%E7%AB%AF/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1147,126 +1227,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/06/04/3.%E9%9D%A2%E5%90%91%E8%BF%9E%E6%8E%A5%E5%92%8C%E6%97%A0%E8%BF%9E%E6%8E%A5%E7%9A%84%E5%A5%97%E6%8E%A5%E5%AD%97%E5%88%B0%E5%BA%95%E6%9C%89%E4%BB%80%E4%B9%88%E5%8C%BA%E5%88%AB/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/06/04/3.%E9%9D%A2%E5%90%91%E8%BF%9E%E6%8E%A5%E5%92%8C%E6%97%A0%E8%BF%9E%E6%8E%A5%E7%9A%84%E5%A5%97%E6%8E%A5%E5%AD%97%E5%88%B0%E5%BA%95%E6%9C%89%E4%BB%80%E4%B9%88%E5%8C%BA%E5%88%AB/" class="post-title-link" itemprop="url">面向连接和无连接的套接字到底有什么区别?</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2020-06-04 23:13:28" itemprop="dateCreated datePublished" datetime="2020-06-04T23:13:28+08:00">2020-06-04</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2022-10-11 22:40:52" itemprop="dateModified" datetime="2022-10-11T22:40:52+08:00">2022-10-11</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Socket/" itemprop="url" rel="index"><span itemprop="name">Socket</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>上一节提到，流格式套接字（Stream Sockets）就是“面向连接的套接字”，它基于 TCP 协议；数据报格式套接字（Datagram Sockets）就是“无连接的套接字”，它基于 UDP 协议。</p>
-<p>这给大家造成一种印象，面向连接就是可靠的通信，无连接就是不可靠的通信，实际情况是这样吗？</p>
-<p>另外，不管是哪种数据传输方式，都得通过整个 Internet 网络的物理线路将数据传输过去，从这个层面理解，所有的 (socket)都是有物理连接的呀，为什么还有无连接的 socket 呢？</p>
-<p>从字面上理解，面向连接好像有一条管道，它连接发送端和接收端，数据包都通过这条管道来传输。当然，两台计算机在通信之前必须先搭建好管道。</p>
-<p>无连接好像没头苍蝇乱撞，数据包从发送端到接收端并没有固定的线路，爱怎么走就怎么走，只要能到达就行。每个数据包都比较自私，不和别人分享自己的线路，但是，大家最终都能殊途同归，到达接收端。</p>
-<p><img src="http://c.biancheng.net/uploads/allimg/190125/1-1Z1251140543K.gif" alt="ä¸ä¸ªç®åçäºèç½æ¨¡å"></p>
-<p>上图是一个简化的互联网模型，H1 ~ H6 表示计算机，A~E 表示路由器，发送端发送的数据必须经过路由器的转发才能到达接收端。</p>
-<p>假设 H1 要发送若干个数据包给 H6，那么有多条路径可以选择，比如：</p>
-<ul>
-<li>路径①：H1 –&gt; A –&gt; C –&gt; E –&gt; H6</li>
-<li>路径②：H1 –&gt; A –&gt; B –&gt; E –&gt; H6</li>
-<li>路径③：H1 –&gt; A –&gt; B –&gt; D –&gt; E –&gt; H6</li>
-<li>路径④：H1 –&gt; A –&gt; B –&gt; C –&gt; E –&gt; H6</li>
-<li>路径⑤：H1 –&gt; A –&gt; C –&gt; B –&gt; D –&gt; E –&gt; H6</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">数据包的传输路径是路由器根据算法来计算出来的，算法会考虑很多因素，比如网络的拥堵状况、下一个路由器是否忙碌等。</span><br></pre></td></tr></table></figure>
-
-<h3 id="无连接的套接字"><a href="#无连接的套接字" class="headerlink" title="无连接的套接字"></a>无连接的套接字</h3><p>对于无连接的套接字，每个数据包可以选择不同的路径，比如第一个数据包选择路径④，第二个数据包选择路径①，第三个数据包选择路径②……当然，它们也可以选择相同的路径，那也只不过是巧合而已。</p>
-<p>每个数据包之间都是独立的，各走各的路，谁也不影响谁，除了迷路的或者发生意外的数据包，最后都能到达 H6。但是，到达的顺序是不确定的，比如：</p>
-<ul>
-<li>第一个数据包选择了一条比较长的路径（比如路径⑤），第三个数据包选择了一条比较短的路径（比如路径①），虽然第一个数据包很早就出发了，但是走的路比较远，最终还是晚于第三个数据包达到。</li>
-<li>第一个数据包选择了一条比较短的路径（比如路径①），第三个数据包选择了一条比较长的路径（比如路径⑤），按理说第一个数据包应该先到达，但是非常不幸，第一个数据包走的路比较拥堵，这条路上的数据量非常大，路由器处理得很慢，所以它还是晚于第三个数据包达到了。</li>
-</ul>
-<p>还有一些意外情况会发生，比如：</p>
-<ul>
-<li>第一个数据包选择了路径①，但是路由器C突然断电了，那它就到不了 H6 了。</li>
-<li>第三个数据包选择了路径②，虽然路不远，但是太拥堵，以至于它等待的时间太长，路由器把它丢弃了。</li>
-</ul>
-<p>总之，对于无连接的套接字，数据包在传输过程中会发生各种不测，也会发生各种奇迹。H1 只负责把数据包发出，至于它什么时候到达，先到达还是后到达，有没有成功到达，H1 都不管了；H6 也没有选择的权利，只能被动接收，收到什么算什么，爱用不用。</p>
-<p>无连接套接字遵循的是「尽最大努力交付」的原则，就是尽力而为，实在做不到了也没办法。无连接套接字提供的没有质量保证的服务。</p>
-<h3 id="面向连接的套接字"><a href="#面向连接的套接字" class="headerlink" title="面向连接的套接字"></a>面向连接的套接字</h3><p>面向连接的套接字在正式通信之前要先确定一条路径，没有特殊情况的话，以后就固定地使用这条路径来传递数据包了。当然，路径被破坏的话，比如某个路由器断电了，那么会重新建立路径。</p>
-<p><img src="http://c.biancheng.net/uploads/allimg/190125/1-1Z1251F50LS.gif" alt="éå¥½çè·¯å¾"></p>
-<p>这条路径是由路由器维护的，路径上的所有路由器都要存储该路径的信息（实际上只需要存储上游和下游的两个路由器的位置就行），所以路由器是有开销的。</p>
-<p>H1 和 H6 通信完毕后，要断开连接，销毁路径，这个时候路由器也会把之前存储的路径信息擦除。</p>
-<p>在很多网络通信教程中，这条预先建立好的路径被称为“虚电路”，就是一条虚拟的通信电路。</p>
-<p>为了保证数据包准确、顺序地到达，发送端在发送数据包以后，必须得到接收端的确认才发送下一个数据包；如果数据包发出去了，一段时间以后仍然没有得到接收端的回应，那么发送端会重新再发送一次，直到得到接收端的回应。这样一来，发送端发送的所有数据包都能到达接收端，并且是按照顺序到达的。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">发送端发送一个数据包，如何得到接收端的确认呢？很简单，为每一个数据包分配一个 ID，接收端接收到数据包以后，再给发送端返回一个数据包，告诉发送端我接收到了 ID 为 xxx 的数据包。</span><br></pre></td></tr></table></figure>
-
-<p>面向连接的套接字会比无连接的套接字多出很多数据包，因为发送端每发送一个数据包，接收端就会返回一个数据包。此外，建立连接和断开连接的过程也会传递很多数据包。</p>
-<p>不但是数量多了，每个数据包也变大了：除了源端口和目的端口，面向连接的套接字还包括序号、确认信号、数据偏移、控制标志（通常说的 URG、ACK、PSH、RST、SYN、FIN）、窗口、校验和、紧急指针、选项等信息；而无连接的套接字则只包含长度和校验和信息。</p>
-<p>有连接的数据包比无连接大很多，这意味着更大的负载和更大的带宽。许多即时聊天软件采用 UDP 协议（无连接套接字），与此有莫大的关系。</p>
-<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>两种套接字各有优缺点：</p>
-<ul>
-<li>无连接套接字传输效率高，但是不可靠，有丢失数据包、捣乱数据的风险；</li>
-<li>有连接套接字非常可靠，万无一失，但是传输效率低，耗费资源多。</li>
-</ul>
-<p>两种套接字的特点决定了它们的应用场景，有些服务对可靠性要求比较高，必须数据包能够完整无误地送达，那就得选择有连接的套接字（TCP 服务），比如 HTTP、FTP 等；而另一些服务，并不需要那么高的可靠性，效率和实时才是它们所关心的，那就可以选择无连接的套接字（UDP 服务），比如 DNS、即时聊天工具等。</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1336,12 +1296,12 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">32</span>
+          <span class="site-state-item-count">33</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
-        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-count">6</span>
         <span class="site-state-item-name">categories</span>
       </div>
       <div class="site-state-item site-state-tags">
